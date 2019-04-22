@@ -1,5 +1,4 @@
 
-typedef struct Rider
-{
+typedef struct Rider {
   int identifier;
 } Rider;
