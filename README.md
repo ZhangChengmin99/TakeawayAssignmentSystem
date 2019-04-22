@@ -14,7 +14,7 @@
 
 * 约定3: 每个方格的宽高都一样，即骑手走过每个方格的距离一样，速度也一样，约定为骑手每走过一个方格花费1个时间单位。
 
-![](https://ws3.sinaimg.cn/large/006tNc79ly1g2bi7yx320j30lm0k0jui.jpg)
+![](https://ws2.sinaimg.cn/large/006tNc79ly1g2bi8xy4paj30da0c6jt0.jpg)
 
 ## 三 运营规则及约束
 * 约束-1：系统开始运营时，你有1000$作为运营资本；
