@@ -48,7 +48,7 @@ a.从文件输入
 每个订单一行输入，格式为：
 订单编号<空格>下单时间<空格>餐馆横坐标<空格>餐馆纵坐标<空格>食客横坐标<空格>食客纵坐标
 在软件系统开发期间，老师会提供几组测试数据（输入文件和参照结果）给同学们，便于大家测试。最后验收的时候，老师会现场给定新的输入文件，来验证各组程序的算法优劣。
-[image:8AE61C41-7908-4017-91A3-5893A6A57C3A-17450-0000B0BE493E4253/C902FDB1-558E-4D2E-AA75-0DA8B0A66CCD.png]
+![](https://ws2.sinaimg.cn/large/006tNc79ly1g2bi31udfjj30y00iatau.jpg)
 
 b.从键盘输入
 格式同文件输入
@@ -56,7 +56,7 @@ b.从键盘输入
 读取输入的示例代码
 C：while(scanf(“%d%d%d%d%d%d”,&index,&time,&x1,&y1,&x2,&y2)!=EOF)
 C++：while(cin>>index>>time>>x1>>y1>>x2>>y2)
-[image:316695DE-F4DF-4823-B9D8-18F4C04467B0-17450-0000B0FBD0662B72/63EED37A-9A42-4181-A84E-6E6EB201367A.png]
+![](https://ws1.sinaimg.cn/large/006tNc79ly1g2bi323tfhj30y00hqq3l.jpg)
 
 c．图形界面输入（动画版本）
 订单输入均通过点击对应的界面按钮（鼠标）实现。
@@ -70,11 +70,11 @@ a.文件输出
 3.接单数
 4.完成数
 5.超时数 
-[image:F4981D33-D63F-4591-9573-0B8EDCCCECB2-17450-0000B12E854A0521/10E8BCDD-9F0F-4691-8A28-7500966C860B.png]
+![](https://ws2.sinaimg.cn/large/006tNc79ly1g2bi32c00tj30y00iagq6.jpg)
 
 b.命令行输出
 可用纯文字输出，也可用字符图形的效果代替文字形式的骑手坐标输出。力求直观。
-[image:99077495-19E9-4478-9791-BE667A02C374-17450-0000B138DA1A7C2F/4145E9FD-B0B0-44D3-B5DE-8D4FD7456058.png]
+![](https://ws2.sinaimg.cn/large/006tNc79ly1g2bi31yr5ij30y00i80uf.jpg)
 
 c.动画输出
 在图形窗口中用绘制房间、道路、骑手
