@@ -18,12 +18,12 @@
     <ClCompile Include="TakeawayAssignmentSystem.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Coordinate.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="common.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="elementType.h">
+    <ClInclude Include="Coordinate.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
