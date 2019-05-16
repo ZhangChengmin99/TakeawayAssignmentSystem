@@ -9,12 +9,12 @@ void unitTestOfRiders();
 void unitTestOfCompany();
 
 int main() {
-      unitTestOfCoordinate();
+      /*unitTestOfCoordinate();
       unitTestOfTasksItem();
       unitTestOfRoute();
       unitTestOfTasksItemList();
       unitTestOfRider();
-      unitTestOfRiders();
+      unitTestOfRiders();*/
       unitTestOfCompany();
 }
 
@@ -119,6 +119,7 @@ void unitTestOfRider() {
 }
 
 void unitTestOfRiders() {
+  std::cout << "UNIT:TEST:OF:RIDERS:\n";
   Riders ridersGroup1 = Riders(3, 8, 7);
   ridersGroup1.tellAllRidersInfo();
   ridersGroup1.increaseTheRiders(2, 9, 7);
@@ -138,15 +139,19 @@ void unitTestOfRiders() {
   std::cout << "theFinalProfit: " << ridersGroup1.getTheFinalProfit() << "$\n";
   Riders riderGroup2;
   riderGroup2.tellAllRidersInfo();
+  std::cout << "UNIT:TEST:OF:RIDERS:END:\n";
 }
 
 void unitTestOfCompany() {
+  std::cout << "UNIT:TEST:OF:COMPANY:\n";
   Company company1;
   company1.printCompanyInfo();
   company1.welcomeGuide();
   company1.printCompanyInfo();
-  company1.buyRiders(2);
+  company1.buyRiders(3);
   company1.printCompanyInfo();
-  Company company2 = Company(1, 8, 7);
+  Company company2 = Company(1, 6, 7);
+  company2.buyRiders(2);
   company2.printCompanyInfo();
+  std::cout << "UNIT:TEST:OF:COMPANY:END:\n";
 }

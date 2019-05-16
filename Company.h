@@ -11,13 +11,15 @@
 class Company {
  private:
   char *name;
+  int x;
+  int y;
   int worldTime;
   int totalAsset;
 
  public:
   Riders riderGroup;
   Company();
-  explicit Company(int riderNum, int x, int y);
+  explicit Company(int riderNum, int x1, int y1);
   void changeTheCompanyName(char *newName);
   bool buyRiders(int num);
   void welcomeGuide();

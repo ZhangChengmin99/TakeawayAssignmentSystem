@@ -6,15 +6,19 @@
 
 Company::Company() {
   totalAsset = 1000;
+  x = 8;
+  y = 7;
   worldTime = 0;  //执行完欢迎使用引导后世界时间变成1
   name = new char[100];
   riderGroup = Riders(0, 8, 7);
   strcpy_s(name, 100,"defaultName");
 }
 
-Company::Company(int riderNum, int x, int y) {
+Company::Company(int riderNum, int x1, int y1) {
   totalAsset = 1000;
   worldTime = 0;
+  x = x1;
+  y = y1;
   name = new char[100];
   Coordinate checkCoordinate = Coordinate(x, y);
   if (1000 - riderNum * 300 < 0) {
@@ -33,7 +37,7 @@ Company::Company(int riderNum, int x, int y) {
 
 bool Company::buyRiders(int num) {
   if (totalAsset - num * 300) {
-    riderGroup.increaseTheRiders(num, 8, 7);
+    riderGroup.increaseTheRiders(num, x, y);
     totalAsset -= num * 300;
     return true;
   }
