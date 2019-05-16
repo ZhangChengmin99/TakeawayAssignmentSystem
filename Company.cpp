@@ -9,7 +9,7 @@ Company::Company() {
   worldTime = 0;  //执行完欢迎使用引导后世界时间变成1
   name = new char[100];
   riderGroup = Riders(0, 8, 7);
-  strcpy(name, "defaultName");
+  strcpy_s(name, 100,"defaultName");
 }
 
 Company::Company(int riderNum, int x, int y) {
@@ -23,11 +23,11 @@ Company::Company(int riderNum, int x, int y) {
   if (checkCoordinate.roadJudge()) {
     riderGroup = Riders(riderNum, x, y);
     totalAsset -= riderNum * 300;
-    strcpy(name, "defaultName");
+    strcpy_s(name, 100, "defaultName");
   } else {
     riderGroup = Riders(riderNum, 8, 7);
     totalAsset -= riderNum * 300;
-    strcpy(name, "defaultName");
+    strcpy_s(name, 100, "defaultName");
   }
 }
 
@@ -40,7 +40,10 @@ bool Company::buyRiders(int num) {
   return false;
 }
 
-void Company::changeTheCompanyName(char *newName) { strcpy(name, newName); }
+void Company::changeTheCompanyName(char *newName) {
+  strcpy_s(name, 100, newName);
+  ;
+}
 
 bool Company::receiveDistributeTheTask(int no, int time, int restaurantAddX,
                                        int restaurantAddY, int customerAddX,

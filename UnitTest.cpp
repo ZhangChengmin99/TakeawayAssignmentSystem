@@ -9,13 +9,13 @@ void unitTestOfRiders();
 void unitTestOfCompany();
 
 int main() {
-  //    unitTestOfCoordinate();
-  //    unitTestOfTasksItem();
-  //    unitTestOfRoute();
-  //    unitTestOfTasksItemList();
-  //    unitTestOfRider();
-  //    unitTestOfRiders();
-  //    unitTestOfCompany();
+      unitTestOfCoordinate();
+      unitTestOfTasksItem();
+      unitTestOfRoute();
+      unitTestOfTasksItemList();
+      unitTestOfRider();
+      unitTestOfRiders();
+      unitTestOfCompany();
 }
 
 void unitTestOfTasksItem() {
