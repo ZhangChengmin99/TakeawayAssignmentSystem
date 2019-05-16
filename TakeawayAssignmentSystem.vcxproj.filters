@@ -21,9 +21,48 @@
     <ClCompile Include="Coordinate.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Route.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TasksItem.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TasksItemList.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Rider.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Riders.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Company.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="UnitTest.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Coordinate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Route.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TasksItem.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TasksItemList.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Rider.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Riders.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Company.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

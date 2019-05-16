@@ -151,11 +151,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Company.cpp" />
     <ClCompile Include="Coordinate.cpp" />
+    <ClCompile Include="Rider.cpp" />
+    <ClCompile Include="Riders.cpp" />
+    <ClCompile Include="Route.cpp" />
     <ClCompile Include="TakeawayAssignmentSystem.cpp" />
+    <ClCompile Include="TasksItem.cpp" />
+    <ClCompile Include="TasksItemList.cpp" />
+    <ClCompile Include="UnitTest.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Company.h" />
     <ClInclude Include="Coordinate.h" />
+    <ClInclude Include="Rider.h" />
+    <ClInclude Include="Riders.h" />
+    <ClInclude Include="Route.h" />
+    <ClInclude Include="TasksItem.h" />
+    <ClInclude Include="TasksItemList.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
