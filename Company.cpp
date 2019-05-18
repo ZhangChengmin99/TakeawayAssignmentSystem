@@ -48,17 +48,18 @@ void Company::changeTheCompanyName(char *newName) {
   strcpy_s(name, 100, newName);
 }
 
-bool Company::receiveDistributeTheTask(int no, int time, int restaurantAddX,
+int Company::receiveDistributeTheTask(int no, int time, int restaurantAddX,
                                        int restaurantAddY, int customerAddX,
                                        int customerAddY) {
   // TODO:: 订单分配核心算法
+  // 分配任务并在无法分配建议购买骑手时返回数值正整数，无须购买时返回0
+  int buyRidersJudgeNum = 0;
   int distributeRiderNo = -1;
-
-  
-  // TODO:: 经过匹配度计算计算出匹配骑手
-  return riderGroup.distributeTheTask(distributeRiderNo, no, time, true,
-                                      restaurantAddX, restaurantAddY,
-                                      customerAddX, customerAddY);
+  // TODO:: 经过匹配度计算计算出匹配骑手若需要购买骑手请先返回购买数量不执行分配语句
+  riderGroup.distributeTheTask(distributeRiderNo, no, time, true,
+                               restaurantAddX, restaurantAddY, customerAddX,
+                               customerAddY);
+  return buyRidersJudgeNum;
 }
 
 void Company::welcomeGuide() {
@@ -73,13 +74,12 @@ void Company::welcomeGuide() {
 }
 
 void Company::runAndUpdateCompany() {
-  // 执行receiveDistributeTheTask后的操作
+  //	receiveDistributeTheTask
   //    updatetheRouteOfAllRiders();
   //    changeCoordinateOfAllRidersByRoutes();
   //    updateAllRidertaskListStateAfterMovement(time);
   worldTime += 1;
-  totalAsset += riderGroup.allRidersActionLoopAndReturnProfit;
-  // 最后
+  totalAsset += riderGroup.allRidersActionLoopAndReturnProfit(worldTime);
 }
 
 void Company::printCompanyInfo() {

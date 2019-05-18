@@ -21,8 +21,8 @@ void Riders::changeCoordinateOfAllRidersByRoutes() {
 
 int Riders::returnThisTurnCompletedTaskProfitAndPopIt() {
   int thisTurnProfit = 0;
-  for (int i = 0; i < riders.size; i++) {
-    thisTurnProfit += riders.at(i).returnThisTurnCompletedTaskProfitAndPopIt;
+  for (int i = 0; i < riders.size(); i++) {
+    thisTurnProfit += riders.at(i).returnThisTurnCompletedTaskProfitAndPopIt();
   }
   return thisTurnProfit;
 }

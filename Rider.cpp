@@ -46,7 +46,7 @@ int Rider::intimateMyRouteAndReturnIncreasedStepsNum(
   int inimatedAllStep = -1;
   // TODO::º∆À„≤ø∑÷
   //
-  return inimatedAllStep - theRoute.routes.size;
+  return inimatedAllStep - theRoute.routes.size();
 }
 
 void Rider::updateMytaskListStateAfterMovement(int time) {
@@ -64,7 +64,8 @@ void Rider::updateMytaskListStateAfterMovement(int time) {
 
 int Rider::returnThisTurnCompletedTaskProfitAndPopIt() {
   int thisTurnProfit = 0;
-  thisTurnProfit += theTaskList.returnTheCompletedTaskProfitAndPopIt;
+  thisTurnProfit += theTaskList.returnTheCompletedTaskProfitAndPopIt();
+  totalProfitGet += thisTurnProfit;
   return thisTurnProfit;
 }
 

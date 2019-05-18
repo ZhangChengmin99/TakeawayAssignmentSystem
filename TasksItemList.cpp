@@ -16,10 +16,10 @@ TasksItemList::TasksItemList(int num) {
 
 int TasksItemList::returnTheCompletedTaskProfitAndPopIt() {
   int thisTurnProfit = 0;
-  for (int i = 0; i < taskItems.size; i++) {
+  for (int i = 0; i < taskItems.size(); i++) {
     if (taskItems.at(i).sendGoodState) {
-      thisTurnProfit += taskItems.at(i).getProfit;
-      taskItems.erase(taskItems.begin+i);
+      thisTurnProfit += taskItems.at(i).getProfit();
+      taskItems.erase(taskItems.begin()+i);
     }
   }
   return thisTurnProfit;

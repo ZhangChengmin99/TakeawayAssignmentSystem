@@ -24,7 +24,8 @@ class Company {
   bool buyRiders(int num);
   void welcomeGuide();
   void runAndUpdateCompany();
-  bool receiveDistributeTheTask(int no, int time, int restaurantAddX,
+  // 分配任务并在无法分配建议购买骑手时返回数值正整数，无须购买时返回0
+  int  receiveDistributeTheTask(int no, int time, int restaurantAddX,
                                 int restaurantAddY, int customerAddX,
                                 int customerAddY);
   void printCompanyInfo();

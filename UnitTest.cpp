@@ -7,15 +7,17 @@ void unitTestOfTasksItemList();
 void unitTestOfRider();
 void unitTestOfRiders();
 void unitTestOfCompany();
+void unitTest();
 
 int main() {
-      unitTestOfCoordinate();
+      /*unitTestOfCoordinate();
       unitTestOfTasksItem();
       unitTestOfRoute();
       unitTestOfTasksItemList();
       unitTestOfRider();
       unitTestOfRiders();
-      unitTestOfCompany();
+      unitTestOfCompany();*/
+  unitTest();
 }
 
 void unitTestOfTasksItem() {
@@ -134,7 +136,7 @@ void unitTestOfRiders() {
   ridersGroup1.tellAllRidersInfo();
   ridersGroup1.updateAllRidertaskListStateAfterMovement(30);
   ridersGroup1.tellAllRidersInfo();
-  ridersGroup1.allRidersActionLoop(3);
+  ridersGroup1.allRidersActionLoopAndReturnProfit(30);
   ridersGroup1.tellAllRidersInfo();
   std::cout << "theFinalProfit: " << ridersGroup1.getTheFinalProfit() << "$\n";
   Riders riderGroup2;
@@ -154,4 +156,22 @@ void unitTestOfCompany() {
   company2.buyRiders(2);
   company2.printCompanyInfo();
   std::cout << "UNIT:TEST:OF:COMPANY:END:\n";
+}
+
+
+void unitTest() {
+  Company company2 = Company(1, 8, 7);
+  company2.buyRiders(2);
+  company2.welcomeGuide();
+  company2.printCompanyInfo();
+  for (int i = 0; i < company2.riderGroup.riders.size(); i++) {
+    company2.riderGroup.distributeTheTask(i,i,1,true,6,6,6,6);
+  }
+  for (int i = 0; i < company2.riderGroup.riders.size(); i++) {
+    company2.riderGroup.riders.at(i).theRoute.addBackCustomCoordinate(6, 7);
+  }
+  company2.runAndUpdateCompany();
+  company2.printCompanyInfo();
+
+ 
 }
