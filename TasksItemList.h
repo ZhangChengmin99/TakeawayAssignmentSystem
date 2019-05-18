@@ -11,8 +11,12 @@
 class TasksItemList {
  public:
   std::deque<TasksItem> taskItems;
+  // 生成空队列
   TasksItemList();
+  // 生成num数量成员的队列
   explicit TasksItemList(int num);
+  // 返回完成的任务收益并且将此任务出队列
+  int returnTheCompletedTaskProfitAndPopIt();
   void tellTasksItemList();
   void addFrontCustomTasksItem(int num1, int receiveTime1,
                                bool contributionState1, int riderId1,

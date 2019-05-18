@@ -6,13 +6,13 @@
 
 Rider::Rider() {
   id = -1;
-  theActiveTaskNum = -1;
+  totalProfitGet = 0;
   coordinateOfSelf = Coordinate();
 }
 
 Rider::Rider(int id1, int x, int y) {
   id = id1;  // id应该从总骑手数组中引用,通过id1传入
-  theActiveTaskNum = 0;
+  totalProfitGet = 0;
   coordinateOfSelf = Coordinate(x, y);
   // 其余三个数据结构调用默认构造器
 }
@@ -38,8 +38,19 @@ void Rider::updateMytheRoute() {
   // TODO::个人路径规划算法核心
 }
 
+int Rider::intimateMyRouteAndReturnIncreasedStepsNum(
+    int num1, int receiveTime1, bool contributionState1, int riderId1,
+    int restaurantAddX, int restaurantAddY, int customerAddX,
+    int customerAddY) {
+  // TODO::个人路径规划算法核心,利用本骑手taskItemList中的全部任务外加输入任务返回步数增加数量
+  int inimatedAllStep = -1;
+  // TODO::计算部分
+  //
+  return inimatedAllStep - theRoute.routes.size;
+}
+
 void Rider::updateMytaskListStateAfterMovement(int time) {
-  for (int i = theActiveTaskNum; i < Rider::theTaskList.taskItems.size(); i++) {
+  for (int i = 0; i < Rider::theTaskList.taskItems.size(); i++) {
     if (Rider::coordinateOfSelf.insideJudgeFromAnother(
             theTaskList.taskItems[i].restaurantAdd)) {
       theTaskList.taskItems[i].changeFetchGoodState(true);
@@ -47,28 +58,27 @@ void Rider::updateMytaskListStateAfterMovement(int time) {
     if (Rider::coordinateOfSelf.insideJudgeFromAnother(
             theTaskList.taskItems[i].customerAdd)) {
       theTaskList.taskItems[i].changeSendDetail(true, time);
-      theActiveTaskNum += 1;
     }
   }
+}
+
+int Rider::returnThisTurnCompletedTaskProfitAndPopIt() {
+  int thisTurnProfit = 0;
+  thisTurnProfit += theTaskList.returnTheCompletedTaskProfitAndPopIt;
+  return thisTurnProfit;
 }
 
 void Rider::tellTheRider() {
   std::cout << "**********************************************\n";
   std::cout << "1.The id:" << Rider::id << " rider data:\n";
-  std::cout << "2.TheActiveTaskNum:" << Rider::theActiveTaskNum << '\n';
-  std::cout << "3.The position of self:\n";
+  std::cout << "2.The position of self:\n";
   Rider::coordinateOfSelf.tellPosition();
-  std::cout << "4.The Routes of the future:\n";
+  std::cout << "3.The Routes of the future:\n";
   Rider::theRoute.tellTheRoute();
-  std::cout << "5.The TaskList:\n";
+  std::cout << "4.The TaskList:\n";
   Rider::theTaskList.tellTasksItemList();
-  std::cout << "6.The Total Profit Gets: " << getTheTotalProfit() << "$\n";
+  std::cout << "5.The Total Profit Gets: " << totalProfitGet << "$\n";
   std::cout << "**********************************************\n";
 }
 
-int Rider::getTheTotalProfit() {
-  int total = 0;
-  for (int i = 0; i < Rider::theActiveTaskNum; i++)
-    total += theTaskList.taskItems[i].getProfit();
-  return total;
-}
+int Rider::getTheTotalProfit() { return totalProfitGet; }

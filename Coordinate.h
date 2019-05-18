@@ -43,6 +43,10 @@ class Coordinate {
   bool insideJudgeFromAnother(Coordinate coordinate2);
   // 报告位置输出
   void tellPosition();
+  // 只读X坐标访问
+  int returnTheXPosition();
+  // 只读Y坐标访问
+  int returnTheYPosition();
 };
 
 #endif  // TAKEAWAYASSIGNMENT0_1_COORDINATE_H

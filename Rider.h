@@ -11,7 +11,7 @@
 class Rider {
  private:
   int id;
-  int theActiveTaskNum;
+  int totalProfitGet;
 
  public:
   Coordinate coordinateOfSelf;
@@ -25,9 +25,14 @@ class Rider {
   bool changeCoordinateOfSelf(Coordinate outCoordinate);
   bool changeCoordinateOfSelfByRoutes();
   void updateMytheRoute();
+  int intimateMyRouteAndReturnIncreasedStepsNum(int num1, int receiveTime1,
+                                       bool contributionState1, int riderId1,
+                                       int restaurantAddX, int restaurantAddY,
+                                       int customerAddX, int customerAddY);
   int getTheTotalProfit();
   void tellTheRider();
   void updateMytaskListStateAfterMovement(int time);
+  int returnThisTurnCompletedTaskProfitAndPopIt();
 };
 
 #endif  // TAKEAWAYASSIGNMENT0_1_RIDER_H

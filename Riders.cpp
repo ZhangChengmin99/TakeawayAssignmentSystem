@@ -19,6 +19,14 @@ void Riders::changeCoordinateOfAllRidersByRoutes() {
   }
 }
 
+int Riders::returnThisTurnCompletedTaskProfitAndPopIt() {
+  int thisTurnProfit = 0;
+  for (int i = 0; i < riders.size; i++) {
+    thisTurnProfit += riders.at(i).returnThisTurnCompletedTaskProfitAndPopIt;
+  }
+  return thisTurnProfit;
+}
+
 void Riders::updateAllRidertaskListStateAfterMovement(int time) {
   for (int i = 0; i < riders.size(); i++) {
     riders[i].updateMytaskListStateAfterMovement(time);
@@ -57,10 +65,11 @@ bool Riders::distributeTheTask(int riderId, int no, int receiveTime1,
   return true;
 }
 
-void Riders::allRidersActionLoop(int time) {
+int Riders::allRidersActionLoopAndReturnProfit(int time) {
   updatetheRouteOfAllRiders();
   changeCoordinateOfAllRidersByRoutes();
   updateAllRidertaskListStateAfterMovement(time);
+  return returnThisTurnCompletedTaskProfitAndPopIt();
 }
 
 void Riders::tellAllRidersInfo() {

@@ -18,7 +18,8 @@ class Riders {
   void updatetheRouteOfAllRiders();
   void updateAllRidertaskListStateAfterMovement(int time);
   void changeCoordinateOfAllRidersByRoutes();
-  void allRidersActionLoop(int time);
+  int returnThisTurnCompletedTaskProfitAndPopIt();
+  int allRidersActionLoopAndReturnProfit(int time);
   void tellAllRidersInfo();
   bool distributeTheTask(int riderId, int no, int receiveTime1,
                          bool contributionState1, int restaurantAddX,

@@ -128,3 +128,7 @@ bool Coordinate::moveThourghtheIndsideCoordinate(Coordinate coordinate2) {
 }
 
 bool Coordinate::roadJudge() { return x % 2 == 1 || y % 2 == 1; }
+
+int Coordinate::returnTheXPosition() { return x; }
+
+int Coordinate::returnTheYPosition() { return y; }

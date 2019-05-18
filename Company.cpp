@@ -77,9 +77,9 @@ void Company::runAndUpdateCompany() {
   //    updatetheRouteOfAllRiders();
   //    changeCoordinateOfAllRidersByRoutes();
   //    updateAllRidertaskListStateAfterMovement(time);
-  riderGroup.allRidersActionLoop(worldTime);
-  // 最后
   worldTime += 1;
+  totalAsset += riderGroup.allRidersActionLoopAndReturnProfit;
+  // 最后
 }
 
 void Company::printCompanyInfo() {
