@@ -153,6 +153,7 @@
   <ItemGroup>
     <ClCompile Include="Company.cpp" />
     <ClCompile Include="Coordinate.cpp" />
+    <ClCompile Include="outputTest.cpp" />
     <ClCompile Include="Rider.cpp" />
     <ClCompile Include="Riders.cpp" />
     <ClCompile Include="Route.cpp" />

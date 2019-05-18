@@ -9,16 +9,16 @@ void unitTestOfRiders();
 void unitTestOfCompany();
 void unitTest();
 
-int main() {
-      /*unitTestOfCoordinate();
-      unitTestOfTasksItem();
-      unitTestOfRoute();
-      unitTestOfTasksItemList();
-      unitTestOfRider();
-      unitTestOfRiders();
-      unitTestOfCompany();*/
-  unitTest();
-}
+//int main() {
+//      unitTestOfCoordinate();
+//      unitTestOfTasksItem();
+//      unitTestOfRoute();
+//      unitTestOfTasksItemList();
+//      unitTestOfRider();
+//      unitTestOfRiders();
+//      unitTestOfCompany();
+//	  unitTest();
+//}
 
 void unitTestOfTasksItem() {
   std::cout << "UNIT:TEST:OF:TASKSITEM:\n";
