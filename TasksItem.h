@@ -9,7 +9,7 @@
 #include "Coordinate.h"
 
 class TasksItem {
- private:
+public:
   int num;
   int receiveTime;
   bool contributionState;

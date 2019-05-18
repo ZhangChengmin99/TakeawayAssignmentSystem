@@ -46,7 +46,6 @@ bool Company::buyRiders(int num) {
 
 void Company::changeTheCompanyName(char *newName) {
   strcpy_s(name, 100, newName);
-  ;
 }
 
 bool Company::receiveDistributeTheTask(int no, int time, int restaurantAddX,
@@ -54,6 +53,8 @@ bool Company::receiveDistributeTheTask(int no, int time, int restaurantAddX,
                                        int customerAddY) {
   // TODO:: 订单分配核心算法
   int distributeRiderNo = -1;
+
+  
   // TODO:: 经过匹配度计算计算出匹配骑手
   return riderGroup.distributeTheTask(distributeRiderNo, no, time, true,
                                       restaurantAddX, restaurantAddY,
