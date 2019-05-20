@@ -3,6 +3,7 @@
 //
 
 #include "Company.h"
+#include <iomanip>
 
 Company::Company() {
   totalAsset = 1000;
@@ -107,9 +108,18 @@ void Company::printCompanyInfo() {
 }
 
 void Company::printPartCompanyInfo() { 
-	std::cout << "Company   Name: " << name << "\n";
-	std::cout << "Company Assets: " << totalAsset << " $\n";
-    std::cout << "All World Time: " << worldTime << "\n";
-    std::cout << "Receive TasksN: " << receiveTaskNum << "\n";
-    std::cout << "Finished TaskN: " << finishedTaskNum << "\n";
+	std::cout << " *   Company   Name: " << std::setw(10) << name;
+  std::cout << "                                                                                  *\n";
+    std::cout << " *   Company Assets: " << std::setw(8) << totalAsset << " $";
+  std::cout << "                                                               "
+               "                    *\n";
+        std::cout << " *   All World Time: " << std::setw(10) << worldTime;
+  std::cout << "                                                               "
+               "                    *\n";
+        std::cout << " *   Receive TasksN: " << std::setw(10) << receiveTaskNum;
+  std::cout << "                                                               "
+               "                    *\n";
+        std::cout << " *   Finished TaskN: " << std::setw(10) << finishedTaskNum;
+  std::cout << "                                                               "
+               "                    *\n";
 }
