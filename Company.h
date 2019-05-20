@@ -13,6 +13,9 @@ class Company {
   char *name;
   int x;
   int y;
+  int receiveTaskNum;
+  int finishedTaskNum;
+  int outTimeTaskNum;
   int worldTime;
   int totalAsset;
 
@@ -29,6 +32,7 @@ class Company {
                                 int restaurantAddY, int customerAddX,
                                 int customerAddY);
   void printCompanyInfo();
+  void printPartCompanyInfo();
 };
 
 #endif  // TAKEAWAYASSIGNMENT0_1_COMPANY_H

@@ -8,6 +8,9 @@ Company::Company() {
   totalAsset = 1000;
   x = 8;
   y = 7;
+  receiveTaskNum = 0;
+  finishedTaskNum = 0;
+  outTimeTaskNum = 0;
   worldTime = 0;  //执行完欢迎使用引导后世界时间变成1
   name = new char[100];
   riderGroup = Riders(0, 8, 7);
@@ -17,6 +20,9 @@ Company::Company() {
 Company::Company(int riderNum, int x1, int y1) {
   totalAsset = 1000;
   worldTime = 0;
+  receiveTaskNum = 0;
+  finishedTaskNum = 0;
+  outTimeTaskNum = 0;
   x = x1;
   y = y1;
   name = new char[100];
@@ -56,9 +62,13 @@ int Company::receiveDistributeTheTask(int no, int time, int restaurantAddX,
   int buyRidersJudgeNum = 0;
   int distributeRiderNo = -1;
   // TODO:: 经过匹配度计算计算出匹配骑手若需要购买骑手请先返回购买数量不执行分配语句
-  riderGroup.distributeTheTask(distributeRiderNo, no, time, true,
-                               restaurantAddX, restaurantAddY, customerAddX,
-                               customerAddY);
+  if (!buyRidersJudgeNum) {
+    riderGroup.distributeTheTask(distributeRiderNo, no, time, true,
+                                 restaurantAddX, restaurantAddY, customerAddX,
+                                 customerAddY);
+    receiveTaskNum += 1;
+  }
+  
   return buyRidersJudgeNum;
 }
 
@@ -79,6 +89,7 @@ void Company::runAndUpdateCompany() {
   //    changeCoordinateOfAllRidersByRoutes();
   //    updateAllRidertaskListStateAfterMovement(time);
   worldTime += 1;
+  // TODO::同时返回完成单数与超时单数
   totalAsset += riderGroup.allRidersActionLoopAndReturnProfit(worldTime);
 }
 
@@ -93,4 +104,12 @@ void Company::printCompanyInfo() {
   riderGroup.tellAllRidersInfo();
   std::cout << "*************************************************************"
                "********\n";
+}
+
+void Company::printPartCompanyInfo() { 
+	std::cout << "Company   Name: " << name << "\n";
+	std::cout << "Company Assets: " << totalAsset << " $\n";
+    std::cout << "All World Time: " << worldTime << "\n";
+    std::cout << "Receive TasksN: " << receiveTaskNum << "\n";
+    std::cout << "Finished TaskN: " << finishedTaskNum << "\n";
 }
