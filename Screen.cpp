@@ -12,16 +12,34 @@ Screen::Screen(Company com1) {
   count = 0;
   tempLOC.clear();
   for (int i = 0; i < com1.riderGroup.riders.size(); i++) {
-    tempLoc temp;
-    temp.x = com1.riderGroup.riders.at(i).coordinateOfSelf.returnTheXPosition();
-    temp.y = com1.riderGroup.riders.at(i).coordinateOfSelf.returnTheYPosition();
-    tempLOC.push_back(temp);
+    
+    tempLOC.push_back(TransLocationToScreenXY(
+        com1.riderGroup.riders.at(i).coordinateOfSelf.returnTheXPosition(),
+        com1.riderGroup.riders.at(i).coordinateOfSelf.returnTheYPosition()));
   }
 }
 
 
 
-void Screen::PrintChangableElem() {}
+void Screen::PrintChangableElem() {
+	using namespace std;
+	for(int i = 0; i<tempLOC.size(); i++) {
+		gotoxy(tempLOC.at(i));
+		cout << "█";
+	}
+        tempLoc temp = {0, 69 + basementY};
+        gotoxy(temp);
+}
+
+void Screen::ClearChangableElem() {
+  using namespace std;
+  for (int i = 0; i < tempLOC.size(); i++) {
+    gotoxy(tempLOC.at(i));
+    cout << "  ";
+  }
+  tempLoc temp = {0, 69 + basementY};
+  gotoxy(temp);
+}
 
 
 
@@ -180,14 +198,33 @@ void Screen::PrintRoadCenterLine() {
 	count += 1;
 }
 
+void Screen::gotoxy(tempLoc tempLOC) {
+  COORD pos = {tempLOC.x,tempLOC.y};
+  HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);  // 获取标准输出设备句柄
+  SetConsoleCursorPosition(hOut, pos);  //两个参数分别是指定哪个窗体，具体位置
+}
+
+tempLoc Screen::TransLocationToScreenXY(int x, int y) { 
+	y = 9 + basementY + 3*y;
+	// 如果x是偶数
+	if(x%2==0){
+		x = 9 + (x/2) * 12;
+	} else {
+		x = 15 + ( (x-1) / 2 ) * 12;
+	}
+	tempLoc tempLOC = {x,y};
+	return tempLOC; 
+}
+
 void Screen::ReloadTheTempLOC(Company com1) {
 	count = 0;
 	tempLOC.clear();
   for (int i = 0; i < com1.riderGroup.riders.size(); i++) {
-    tempLoc temp;
-    temp.x = com1.riderGroup.riders.at(i).coordinateOfSelf.returnTheXPosition();
-    temp.y = com1.riderGroup.riders.at(i).coordinateOfSelf.returnTheYPosition();
-    tempLOC.push_back(temp);
+    tempLOC.push_back(TransLocationToScreenXY(
+              com1.riderGroup.riders.at(i)
+                  .coordinateOfSelf.returnTheXPosition(),
+              com1.riderGroup.riders.at(i)
+                  .coordinateOfSelf.returnTheYPosition()));
   }
 }
 
