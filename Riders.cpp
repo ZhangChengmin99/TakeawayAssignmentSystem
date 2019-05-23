@@ -19,12 +19,12 @@ void Riders::changeCoordinateOfAllRidersByRoutes() {
   }
 }
 
-int Riders::returnThisTurnCompletedTaskProfitAndPopIt() {
-  int thisTurnProfit = 0;
+OutputDataOfthisTime Riders::returnOutputDataOfthisTimeAndPopFinishedTasks(int time) {
+  OutputDataOfthisTime tempOutput;
   for (int i = 0; i < riders.size(); i++) {
-    thisTurnProfit += riders.at(i).returnThisTurnCompletedTaskProfitAndPopIt();
+    tempOutput.increaseMySelfFromAnotherOutput(riders.at(i).returnOutputDataOfthisTimeAndPopFinishedTasks(time));
   }
-  return thisTurnProfit;
+  return tempOutput;
 }
 
 void Riders::updateAllRidertaskListStateAfterMovement(int time) {
@@ -65,11 +65,11 @@ bool Riders::distributeTheTask(int riderId, int no, int receiveTime1,
   return true;
 }
 
-int Riders::allRidersActionLoopAndReturnProfit(int time) {
+OutputDataOfthisTime Riders::allRidersActionLoopAndReturnProfit(int time) {
   updatetheRouteOfAllRiders();
   changeCoordinateOfAllRidersByRoutes();
   updateAllRidertaskListStateAfterMovement(time);
-  return returnThisTurnCompletedTaskProfitAndPopIt();
+  return returnOutputDataOfthisTimeAndPopFinishedTasks(time);
 }
 
 void Riders::tellAllRidersInfo() {

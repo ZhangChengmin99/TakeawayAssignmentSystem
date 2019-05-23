@@ -5,11 +5,10 @@ class OutputDataOfthisTime {
  public:
   int thisTimeProfitBesidesFINE;  //
   int thisTimeFINE;               //
-  int thisTimeReceiveTaskNUM;
-
   std::deque<int> thisTimeFinishedTaskNO;
   std::deque<int> thisTimeFINEDTaskNO;
- public:
+  void increaseMySelfFromAnotherOutput(OutputDataOfthisTime AnotherOutput);
+  void resetMe();
   OutputDataOfthisTime();
 
   ~OutputDataOfthisTime();

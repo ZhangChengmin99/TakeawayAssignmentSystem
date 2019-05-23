@@ -56,17 +56,18 @@ void Rider::updateMytaskListStateAfterMovement(int time) {
       theTaskList.taskItems[i].changeFetchGoodState(true);
     }
     if (Rider::coordinateOfSelf.insideJudgeFromAnother(
-            theTaskList.taskItems[i].customerAdd)) {
-      theTaskList.taskItems[i].changeSendDetail(true, time);
+            theTaskList.taskItems[i].customerAdd) &&
+        theTaskList.taskItems[i].fetchGoodState) {
+      theTaskList.taskItems[i].changeSendDetailAndReturnFinishedTaskNo(true, time);
     }
   }
 }
 
-int Rider::returnThisTurnCompletedTaskProfitAndPopIt() {
-  int thisTurnProfit = 0;
-  thisTurnProfit += theTaskList.returnTheCompletedTaskProfitAndPopIt();
-  totalProfitGet += thisTurnProfit;
-  return thisTurnProfit;
+OutputDataOfthisTime Rider::returnOutputDataOfthisTimeAndPopFinishedTasks(int time) {
+  OutputDataOfthisTime tempOutput;
+  tempOutput.increaseMySelfFromAnotherOutput(theTaskList.returnOutputDataOfthisTimeAndPopFinishedTasks(time));
+  totalProfitGet += tempOutput.thisTimeProfitBesidesFINE - tempOutput.thisTimeFINE;
+  return tempOutput;
 }
 
 void Rider::tellTheRider() {

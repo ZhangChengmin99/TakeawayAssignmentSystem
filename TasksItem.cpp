@@ -5,6 +5,7 @@
 #include "TasksItem.h"
 
 TasksItem::TasksItem() {
+
   num = -1;
   receiveTime = -1;
   contributionState = false;
@@ -39,16 +40,36 @@ void TasksItem::changeContributionDetail(bool state, int riderId1) {
 
 void TasksItem::changeFetchGoodState(bool state) { fetchGoodState = state; }
 
-void TasksItem::changeSendDetail(bool state, int arrivedTime1) {
+int TasksItem::changeSendDetailAndReturnFinishedTaskNo(bool state, int arrivedTime1) {
   sendGoodState = state;
   arrivedTime = arrivedTime1;
   if ((arrivedTime != -1) && (receiveTime != -1)) {
     if (arrivedTime - receiveTime < 31) {
       profit = 10;
-    } else {
-      profit = -50;
+      return num;
+    } 
+  }
+  return -1;
+}
+
+int TasksItem::ReturnFinishedTaskNo(int worldTime) { 
+	
+	if ((arrivedTime != -1) && (receiveTime != -1)&&sendGoodState) {
+    if (arrivedTime - receiveTime < 31) {
+      profit = 10;
+      return num;
     }
   }
+  return -1;
+}
+
+// 当前超时才算超时
+int TasksItem::checkWhetherOutTimeAndReturnOutTimeTaskNo(int worldTime) {
+  if(worldTime - receiveTime == 31) {
+	  profit = -50;
+	  return num;
+  }
+  return -1;
 }
 
 int TasksItem::getProfit() { return profit; }

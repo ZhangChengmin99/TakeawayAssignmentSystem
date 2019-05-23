@@ -69,7 +69,7 @@ int Company::receiveDistributeTheTask(int no, int time, int restaurantAddX,
                                  restaurantAddX, restaurantAddY, customerAddX,
                                  customerAddY);
 	// 
-    outputThisTime.thisTimeReceiveTaskNUM += 1;
+    receiveTaskNum += 1;
   }
   
   return buyRidersJudgeNum;
@@ -94,8 +94,9 @@ void Company::runAndUpdateCompany() {
   worldTime += 1;
   // TODO::同时返回完成单数与超时单数
   OutputDataOfthisTime tempOutput;
-  riderGroup.allRidersActionLoopAndReturnProfit(worldTime);
-  // 利用返回传值更新tempOutput
+
+  tempOutput = riderGroup.allRidersActionLoopAndReturnProfit(worldTime);
+  
 }
 
 void Company::printCompanyInfo() {

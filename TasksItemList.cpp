@@ -14,15 +14,19 @@ TasksItemList::TasksItemList(int num) {
   taskItems.insert(taskItems.begin(), num, taskItem);
 }
 
-int TasksItemList::returnTheCompletedTaskProfitAndPopIt() {
-  int thisTurnProfit = 0;
-  for (int i = 0; i < taskItems.size(); i++) {
-    if (taskItems.at(i).sendGoodState) {
-      thisTurnProfit += taskItems.at(i).getProfit();
-      taskItems.erase(taskItems.begin()+i);
-    }
+OutputDataOfthisTime TasksItemList::returnOutputDataOfthisTimeAndPopFinishedTasks(int time) {
+  OutputDataOfthisTime tempOutput;
+  // 遍历所有的订单
+  for(int i = 0; i<taskItems.size(); i++) {
+	  // 返回超时订单编号
+	if(taskItems.at(i).checkWhetherOutTimeAndReturnOutTimeTaskNo(time)!=-1){
+      tempOutput.thisTimeFINEDTaskNO.push_back(
+          taskItems.at(i).checkWhetherOutTimeAndReturnOutTimeTaskNo(time));
+	}
+	  // 返回完成订单编号
+        
   }
-  return thisTurnProfit;
+  return tempOutput;
 }
 
 void TasksItemList::tellTasksItemList() {

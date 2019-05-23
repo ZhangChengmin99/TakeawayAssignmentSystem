@@ -26,7 +26,7 @@ void unitTestOfTasksItem() {
   task1.tellTheTasksItem();
   task1.changeContributionDetail(true, 4);
   task1.changeFetchGoodState(true);
-  task1.changeSendDetail(true, 8);
+  task1.changeSendDetailAndReturnFinishedTaskNo(true, 8);
   task1.tellTheTasksItem();
   std::cout << "UNIT:TEST:OF:TASKSITEM:END:\n";
 }

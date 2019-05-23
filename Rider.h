@@ -7,6 +7,7 @@
 
 #include "Route.h"
 #include "TasksItemList.h"
+#include "OutputDataOfthisTime.h"
 
 class Rider {
  private:
@@ -32,7 +33,7 @@ class Rider {
   int getTheTotalProfit();
   void tellTheRider();
   void updateMytaskListStateAfterMovement(int time);
-  int returnThisTurnCompletedTaskProfitAndPopIt();
+  OutputDataOfthisTime returnOutputDataOfthisTimeAndPopFinishedTasks(int time);
 };
 
 #endif  // TAKEAWAYASSIGNMENT0_1_RIDER_H

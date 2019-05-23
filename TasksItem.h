@@ -29,7 +29,12 @@ public:
             int customerAddY);
   void changeContributionDetail(bool state, int riderId1);
   void changeFetchGoodState(bool state);
-  void changeSendDetail(bool state, int arrivedTime1);
+  
+  int changeSendDetailAndReturnFinishedTaskNo(bool state, int arrivedTime1);
+  // 如果完成返回订单编号
+  int ReturnFinishedTaskNo(int worldTime);
+  // 如果超时返回订单编号
+  int checkWhetherOutTimeAndReturnOutTimeTaskNo(int worldTime);
   int getProfit();
   void tellTheTasksItem();
 };
