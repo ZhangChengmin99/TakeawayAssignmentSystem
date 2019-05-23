@@ -1,6 +1,8 @@
 ﻿#include <iostream>
+
 #include "Company.h"
 #include "Screen.h"
+
 
 int main() {
   using namespace std;
@@ -10,8 +12,9 @@ int main() {
   com1.riderGroup.riders[1].coordinateOfSelf.changeCoordinate(14, 3);
   com1.riderGroup.riders[2].coordinateOfSelf.changeCoordinate(2, 15);
   Screen mapScreen(com1);
-  mapScreen.PrintTheAllMaps();
+  mapScreen.PrintTheBasicMap();
   com1.printPartCompanyInfo();
+  system("pause");
 	return 0;
 }
 

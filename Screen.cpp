@@ -21,7 +21,11 @@ Screen::Screen(Company com1) {
 
 
 
-void Screen::PrintTheAllMaps() {
+void Screen::PrintChangableElem() {}
+
+
+
+void Screen::PrintTheBasicMap() {
 	using namespace std;
   SetConsoleTitle(L"TakeawayAssignmentSystem 1.0 by Group 22");
   // 打印装饰行
@@ -150,30 +154,11 @@ void Screen::PrintBulidingCenterLine() {
          << " *  " << count;
   }
 
-  if (tempLOC.size() == 0) {
-    for (int i = 0; i < 8; i++) {
+  for (int i = 0; i < 8; i++) {
       cout << "|      | ";
       cout << "  ";
       putchar(' ');
     }
-  } else {
-    for (int i = 0; i < 8; i++) {
-      cout << "|      | ";
-      bool flag = false;
-      for (int k = 0; k < tempLOC.size(); k++) {
-        if (tempLOC.at(k).y == count && tempLOC.at(k).x == 2 * i + 1) {
-          flag = true;
-          tempLOC.erase(tempLOC.begin() + k);
-        }
-      }
-      if (flag) {
-        cout << "█";
-      } else {
-        cout << "  ";
-      }
-      putchar(' ');
-    }
-  }
   cout << "|      |    *";
   count += 1;
 }
@@ -188,61 +173,11 @@ void Screen::PrintRoadCenterLine() {
     cout << "\n"
          << " *  " << count;
   }
-  if (tempLOC.size() == 0) {
+  
     cout << "|           ";
     for (int i = 0; i < 7; i++) cout << "            ";
-    cout << "       |";
-  } else {
-    // 打印道路中间行第一位置
-    cout << "|  ";
-    bool flag = false;
-    for (int k = 0; k < tempLOC.size(); k++) {
-      if (tempLOC.at(k).y == count && tempLOC.at(k).x == 0) {
-        flag = true;
-        tempLOC.erase(tempLOC.begin() + k);
-      }
-    }
-    if (flag) {
-      cout << "█";
-    } else {
-      cout << "  ";
-    }
-    cout << "       ";
-    // 打印道路中间行中间位置
-    for (int i = 0; i < 7; i++) {
-      flag = false;
-      cout << "   ";
-      for (int k = 0; k < tempLOC.size(); k++) {
-        if (tempLOC.at(k).y == count && tempLOC.at(k).x == 2 * (i + 1)) {
-          flag = true;
-          tempLOC.erase(tempLOC.begin() + k);
-        }
-      }
-      if (flag) {
-        cout << "█";
-      } else {
-        cout << "  ";
-      }
-      cout << "       ";
-    }
-    // 打印道路中间行最后位置
-    cout << "   ";
-    flag = false;
-    for (int k = 0; k < tempLOC.size(); k++) {
-      if (tempLOC.at(k).y == count && tempLOC.at(k).x == 16) {
-        flag = true;
-        tempLOC.erase(tempLOC.begin() + k);
-      }
-    }
-    if (flag) {
-      cout << "█";
-    } else {
-      cout << "  ";
-    }
-    flag = false;
-    cout << "  |    *";
-    count += 1;
-  }
+    cout << "       |    *";
+	count += 1;
 }
 
 void Screen::ReloadTheTempLOC(Company com1) {

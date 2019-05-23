@@ -40,6 +40,7 @@ Company::Company(int riderNum, int x1, int y1) {
     totalAsset -= riderNum * 300;
     strcpy_s(name, 100, "defaultName");
   }
+  
 }
 
 bool Company::buyRiders(int num) {
@@ -67,7 +68,8 @@ int Company::receiveDistributeTheTask(int no, int time, int restaurantAddX,
     riderGroup.distributeTheTask(distributeRiderNo, no, time, true,
                                  restaurantAddX, restaurantAddY, customerAddX,
                                  customerAddY);
-    receiveTaskNum += 1;
+	// 
+    outputThisTime.thisTimeReceiveTaskNUM += 1;
   }
   
   return buyRidersJudgeNum;
@@ -91,7 +93,9 @@ void Company::runAndUpdateCompany() {
   //    updateAllRidertaskListStateAfterMovement(time);
   worldTime += 1;
   // TODO::同时返回完成单数与超时单数
-  totalAsset += riderGroup.allRidersActionLoopAndReturnProfit(worldTime);
+  OutputDataOfthisTime tempOutput;
+  riderGroup.allRidersActionLoopAndReturnProfit(worldTime);
+  // 利用返回传值更新tempOutput
 }
 
 void Company::printCompanyInfo() {

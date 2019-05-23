@@ -7,6 +7,7 @@
 
 #include <string>
 #include "Riders.h"
+#include "OutputDataOfthisTime.h"
 
 class Company {
  private:
@@ -18,7 +19,7 @@ class Company {
   int outTimeTaskNum;
   int worldTime;
   int totalAsset;
-
+  OutputDataOfthisTime outputThisTime;
  public:
   Riders riderGroup;
   Company();

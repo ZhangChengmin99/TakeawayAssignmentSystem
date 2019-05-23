@@ -14,9 +14,12 @@ class Screen {
  public:
   Screen();
   Screen(Company com1);
-  void PrintTheAllMaps();
+  // 使用擦除函数的打印方式
+  void PrintChangableElem();
+  void PrintTheBasicMap();
   void PrintBulidingCenterLine();
   void PrintRoadCenterLine();
+  // *************************
   void ReloadTheTempLOC(Company com1);
   ~Screen();
 };
