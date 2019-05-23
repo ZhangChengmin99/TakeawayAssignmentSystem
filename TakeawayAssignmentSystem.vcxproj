@@ -153,10 +153,10 @@
   <ItemGroup>
     <ClCompile Include="Company.cpp" />
     <ClCompile Include="Coordinate.cpp" />
-    <ClCompile Include="outputTest.cpp" />
     <ClCompile Include="Rider.cpp" />
     <ClCompile Include="Riders.cpp" />
     <ClCompile Include="Route.cpp" />
+    <ClCompile Include="Screen.cpp" />
     <ClCompile Include="TakeawayAssignmentSystem.cpp" />
     <ClCompile Include="TasksItem.cpp" />
     <ClCompile Include="TasksItemList.cpp" />
@@ -168,6 +168,7 @@
     <ClInclude Include="Rider.h" />
     <ClInclude Include="Riders.h" />
     <ClInclude Include="Route.h" />
+    <ClInclude Include="Screen.h" />
     <ClInclude Include="TasksItem.h" />
     <ClInclude Include="TasksItemList.h" />
   </ItemGroup>

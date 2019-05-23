@@ -1,44 +1,43 @@
+#include "Screen.h"
 #include <windows.h>
 #include <iostream>
 #include <string>
-#include "Company.h"
 
-typedef struct tempLoc {
-  int x;
-  int y;
-} tempLoc;
+Screen::Screen() {
+	count = 0;
+	tempLOC.clear();
+}
 
-using namespace std;
-
-void PrintBulidingCenterLine(int* count,deque<tempLoc>* tempLOC);
-void PrintRoadCenterLine(int* count, deque<tempLoc>* tempLOC);
-
-
-int main() {
-  using namespace std;
-  // 0 使用自定义标题
-  SetConsoleTitle(L"TakeawayAssignmentSystem 1.0 by Group 22");
-  // 1 生成假公司与测试数据
-  Company com1 = Company(1, 15, 16);
-  com1.buyRiders(2);
-  com1.riderGroup.riders[1].coordinateOfSelf.changeCoordinate(14, 3);
-  com1.riderGroup.riders[2].coordinateOfSelf.changeCoordinate(2, 15);
-  // 2 创建保存骑手位置的队列保存位置
-  std::deque<tempLoc>* tempLOC;
-  tempLOC = new deque<tempLoc>;
+Screen::Screen(Company com1) {
+  count = 0;
+  tempLOC.clear();
   for (int i = 0; i < com1.riderGroup.riders.size(); i++) {
     tempLoc temp;
     temp.x = com1.riderGroup.riders.at(i).coordinateOfSelf.returnTheXPosition();
     temp.y = com1.riderGroup.riders.at(i).coordinateOfSelf.returnTheYPosition();
-    tempLOC->push_back(temp);
+    tempLOC.push_back(temp);
   }
+}
+
+
+
+void Screen::PrintTheAllMaps() {
+	using namespace std;
+  SetConsoleTitle(L"TakeawayAssignmentSystem 1.0 by Group 22");
   // 打印装饰行
-  cout << "\n ******************************************************************************************************************\n";
-  cout << " *                                                                                                                *\n";
-  cout << " *                                    TakeawayAssignmentSystem 1.0 by Group 22                                    *";
-  cout << "\n *                                                                                                                *\n";
-  cout << " ******************************************************************************************************************";
-  cout << "\n *                                                                                                                *\n";
+  std::cout << "\n "
+               "***************************************************************"
+               "***************************************************\n";
+  cout << " *                                                                  "
+          "                                              *\n";
+  cout << " *                                    TakeawayAssignmentSystem 1.0 "
+          "by Group 22                                    *";
+  cout << "\n *                                                                "
+          "                                                *\n";
+  cout << " *******************************************************************"
+          "***********************************************";
+  cout << "\n *                                                                "
+          "                                                *\n";
   // 打印标尺行
   cout << " *  ";
   cout << "  ";  // 预留竖列空格
@@ -46,10 +45,9 @@ int main() {
   for (int i = 0; i < 10; i++) {
     if (i % 2) {
       cout << 0 << i << " ";
-    }
-    else {
+    } else {
       cout << "   " << 0 << i << "    ";
-	}
+    }
   }
   for (int i = 10; i < 16; i++) {
     if (i % 2) {
@@ -60,9 +58,7 @@ int main() {
   }
   cout << "   16       *";
 
- 
   // 打印建筑物屋顶
-  int count = 0;
   cout << "\n ";
   cout << "*    ";
   for (int i = 0; i < 8; i++) cout << "|￣￣￣|￣￣";
@@ -70,7 +66,7 @@ int main() {
   cout << "    *";
   // 打印建筑物中间行 重要：骑手位置判断逻辑
 
-  PrintBulidingCenterLine(&count,tempLOC);
+  PrintBulidingCenterLine();
   // 打印建筑物最后一行没有底
   cout << "\n ";
   cout << "*    ";
@@ -83,25 +79,24 @@ int main() {
   for (int i = 0; i < 7; i++) cout << " ￣￣￣     ";
   cout << " ￣￣￣|    *";
   // 打印道路中间行 重要：骑手位置判断逻辑
-  PrintRoadCenterLine(&count,tempLOC);
+  PrintRoadCenterLine();
   // 打印道路最后一行
   cout << "\n ";
   cout << "*    ";
   cout << "|           ";
   for (int i = 0; i < 7; i++) cout << "            ";
   cout << "       |    *";
- 
 
   // ***************** 打印循环 ******************
   while (count < 16) {
-	// 打印建筑物屋顶
+    // 打印建筑物屋顶
     cout << "\n ";
     cout << "*    ";
     for (int i = 0; i < 8; i++) cout << "|￣￣￣|    ";
     cout << "|￣￣￣|    *";
     // 打印建筑物中间行
-    PrintBulidingCenterLine(&count, tempLOC);
-	// 打印建筑物最后行
+    PrintBulidingCenterLine();
+    // 打印建筑物最后行
     cout << "\n ";
     cout << "*    ";
     for (int i = 0; i < 8; i++) cout << "|      |    ";
@@ -113,7 +108,7 @@ int main() {
     for (int i = 0; i < 7; i++) cout << " ￣￣￣     ";
     cout << " ￣￣￣|    *";
     // 打印道路中间行
-    PrintRoadCenterLine(&count, tempLOC);
+    PrintRoadCenterLine();
     // 打印道路最后一行
     cout << "\n ";
     cout << "*    ";
@@ -123,7 +118,6 @@ int main() {
   }
   // *********************************************
 
-
   // ***************** 打印第16行 ******************
   // 打印建筑物顶
   cout << "\n ";
@@ -131,7 +125,7 @@ int main() {
   for (int i = 0; i < 8; i++) cout << "|￣￣￣|    ";
   cout << "|￣￣￣|    *";
   // 打印建筑物中间行
-  PrintBulidingCenterLine(&count, tempLOC);
+  PrintBulidingCenterLine();
   // 打印建筑物最后一行
   cout << "\n ";
   cout << "*    ";
@@ -142,32 +136,21 @@ int main() {
   cout << "*    ";
   for (int i = 0; i < 8; i++) cout << " ￣￣￣ ￣￣";
   cout << " ￣￣￣     *";
-  // *********************************************
-  cout << "\n "
-          "********************************************************************"
-          "**********************************************\n";
-  cout << " *                                                                  "
-          "                                              *\n";
-  com1.printPartCompanyInfo();
-  cout << " *                                                                  "
-          "                                              *\n";
-  cout << " "
-          "********************************************************************"
-          "**********************************************\n";
-  //
-  getchar();
-  return 0;
+  
 }
 
-void PrintBulidingCenterLine(int* count, deque<tempLoc> * tempLOC) {
-  
-  if (*count < 10) {
-    cout << "\n" << " *  " << "0" <<*count;
+void Screen::PrintBulidingCenterLine() {
+	using namespace std;
+  if (count < 10) {
+    cout << "\n"
+         << " *  "
+         << "0" << count;
   } else {
-    cout << "\n" << " *  " << *count;
+    cout << "\n"
+         << " *  " << count;
   }
-  
-  if ( tempLOC->size() == 0) {
+
+  if (tempLOC.size() == 0) {
     for (int i = 0; i < 8; i++) {
       cout << "|      | ";
       cout << "  ";
@@ -177,10 +160,10 @@ void PrintBulidingCenterLine(int* count, deque<tempLoc> * tempLOC) {
     for (int i = 0; i < 8; i++) {
       cout << "|      | ";
       bool flag = false;
-      for (int k = 0; k < tempLOC->size(); k++) {
-        if (tempLOC->at(k).y == *count && tempLOC->at(k).x == 2 * i + 1) {
+      for (int k = 0; k < tempLOC.size(); k++) {
+        if (tempLOC.at(k).y == count && tempLOC.at(k).x == 2 * i + 1) {
           flag = true;
-          tempLOC->erase(tempLOC->begin() + k);
+          tempLOC.erase(tempLOC.begin() + k);
         }
       }
       if (flag) {
@@ -192,19 +175,20 @@ void PrintBulidingCenterLine(int* count, deque<tempLoc> * tempLOC) {
     }
   }
   cout << "|      |    *";
-  *count += 1;
+  count += 1;
 }
 
-void PrintRoadCenterLine(int* count, deque<tempLoc>* tempLOC) {
-  if (*count < 10) {
+void Screen::PrintRoadCenterLine() {
+	using namespace std;
+  if (count < 10) {
     cout << "\n"
          << " *  "
-         << "0" << *count;
+         << "0" << count;
   } else {
     cout << "\n"
-         << " *  " << *count;
+         << " *  " << count;
   }
-  if (tempLOC->size() == 0) {
+  if (tempLOC.size() == 0) {
     cout << "|           ";
     for (int i = 0; i < 7; i++) cout << "            ";
     cout << "       |";
@@ -212,10 +196,10 @@ void PrintRoadCenterLine(int* count, deque<tempLoc>* tempLOC) {
     // 打印道路中间行第一位置
     cout << "|  ";
     bool flag = false;
-    for (int k = 0; k < tempLOC->size(); k++) {
-      if (tempLOC->at(k).y == *count && tempLOC->at(k).x == 0) {
+    for (int k = 0; k < tempLOC.size(); k++) {
+      if (tempLOC.at(k).y == count && tempLOC.at(k).x == 0) {
         flag = true;
-        tempLOC->erase(tempLOC->begin() + k);
+        tempLOC.erase(tempLOC.begin() + k);
       }
     }
     if (flag) {
@@ -228,10 +212,10 @@ void PrintRoadCenterLine(int* count, deque<tempLoc>* tempLOC) {
     for (int i = 0; i < 7; i++) {
       flag = false;
       cout << "   ";
-      for (int k = 0; k < tempLOC->size(); k++) {
-        if (tempLOC->at(k).y == *count && tempLOC->at(k).x == 2 * (i + 1)) {
+      for (int k = 0; k < tempLOC.size(); k++) {
+        if (tempLOC.at(k).y == count && tempLOC.at(k).x == 2 * (i + 1)) {
           flag = true;
-          tempLOC->erase(tempLOC->begin() + k);
+          tempLOC.erase(tempLOC.begin() + k);
         }
       }
       if (flag) {
@@ -244,10 +228,10 @@ void PrintRoadCenterLine(int* count, deque<tempLoc>* tempLOC) {
     // 打印道路中间行最后位置
     cout << "   ";
     flag = false;
-    for (int k = 0; k < tempLOC->size(); k++) {
-      if (tempLOC->at(k).y == *count && tempLOC->at(k).x == 16) {
+    for (int k = 0; k < tempLOC.size(); k++) {
+      if (tempLOC.at(k).y == count && tempLOC.at(k).x == 16) {
         flag = true;
-        tempLOC->erase(tempLOC->begin() + k);
+        tempLOC.erase(tempLOC.begin() + k);
       }
     }
     if (flag) {
@@ -257,6 +241,19 @@ void PrintRoadCenterLine(int* count, deque<tempLoc>* tempLOC) {
     }
     flag = false;
     cout << "  |    *";
-    *count += 1;
+    count += 1;
   }
 }
+
+void Screen::ReloadTheTempLOC(Company com1) {
+	count = 0;
+	tempLOC.clear();
+  for (int i = 0; i < com1.riderGroup.riders.size(); i++) {
+    tempLoc temp;
+    temp.x = com1.riderGroup.riders.at(i).coordinateOfSelf.returnTheXPosition();
+    temp.y = com1.riderGroup.riders.at(i).coordinateOfSelf.returnTheYPosition();
+    tempLOC.push_back(temp);
+  }
+}
+
+Screen::~Screen() {}

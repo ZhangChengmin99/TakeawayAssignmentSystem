@@ -108,6 +108,12 @@ void Company::printCompanyInfo() {
 }
 
 void Company::printPartCompanyInfo() { 
+	using namespace std;
+	cout << "\n "
+          "********************************************************************"
+          "**********************************************\n";
+  cout << " *                                                                  "
+          "                                              *\n";
 	std::cout << " *   Company   Name: " << std::setw(10) << name;
   std::cout << "                                                                                  *\n";
     std::cout << " *   Company Assets: " << std::setw(8) << totalAsset << " $";
@@ -122,4 +128,11 @@ void Company::printPartCompanyInfo() {
         std::cout << " *   Finished TaskN: " << std::setw(10) << finishedTaskNum;
   std::cout << "                                                               "
                "                    *\n";
+        cout << " *                                                            "
+                "      "
+                "                                              *\n";
+        cout << " "
+                "**************************************************************"
+                "******"
+                "**********************************************\n";
 }
