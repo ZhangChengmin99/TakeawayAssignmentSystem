@@ -34,6 +34,7 @@ class Company {
                                 int customerAddY);
   void printCompanyInfo();
   void printPartCompanyInfo();
+  void gotoxy(int x,int y);
 };
 
 #endif  // TAKEAWAYASSIGNMENT0_1_COMPANY_H

@@ -77,16 +77,38 @@ int Company::receiveDistributeTheTask(int no, int time, int restaurantAddX,
 }
 
 void Company::welcomeGuide() {
+	using namespace std;
   SetConsoleTitle(L"TakeawayAssignmentSystem 1.0 by Group 22");
+  std::cout << "\n "
+               "***************************************************************"
+               "***************************************************\n";
   
-  std::cout << "WELCOME TO TAKEAWAY ASSIGNMENT SYSTEM!\n";
-  std::cout << "In the beginning, let's name our company!\n";
-  std::cout << "Please enter the name: ";
+  cout << " *                                                                  "
+          "                                              *\n";
+  std::cout << " *                                    WELCOME TO TAKEAWAY ASSIGNMENT SYSTEM 1.0!                                  *\n";
+  std::cout << " *                                         Firstly , let's name our company!                                      *\n";
+  std::cout << " *                                         Please enter the name:                                                 *\n";
+  
+  std::cout << " *                                                                                                                *\n";
+  cout << " *                                                                  "
+          "                                              *\n";
+  std::cout << " "
+               "***************************************************************"
+               "***************************************************";
+  
+  gotoxy(66, 5);
+
   char *newName = new char[100];
   std::cin >> newName;
   Company::changeTheCompanyName(newName);
-  std::cout << "GREAT! YOUR COMPANY: " << name << " SET UP!\n";
+  // 打印创建成功语句
+  Sleep(500);
+  gotoxy(39, 6);
+  cout << "GREAT ! YOUR COMPANY : " << left << setw(10) << name << " SET UP!";
+  // 返回打印位置
+  gotoxy(116,8);
   worldTime += 1;
+  Sleep(1000);
 }
 
 void Company::runAndUpdateCompany() {
@@ -146,4 +168,10 @@ void Company::printPartCompanyInfo() {
                 "**************************************************************"
                 "******"
                 "**********************************************\n";
+}
+
+void Company::gotoxy(int x, int y) {
+  COORD pos = {x, y};
+  HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);  // 获取标准输出设备句柄
+  SetConsoleCursorPosition(hOut, pos);  //两个参数分别是指定哪个窗体，具体位置
 }

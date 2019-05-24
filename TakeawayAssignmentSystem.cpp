@@ -8,10 +8,10 @@ int main() {
   // 1 生成公司和基础屏幕
   // 1-1 生成默认公司对象
   Company com1 = Company(3, 11, 14);
-  // 1-2 运行公司欢迎界面
+  // 1-2 运行公司欢迎界面(未完成)
   com1.welcomeGuide();
   // 1-2 生成默认屏幕对象
-  Screen mapScreen(com1,4);
+  Screen mapScreen(com1,8);
   mapScreen.PrintTheBasicMap();
   
 

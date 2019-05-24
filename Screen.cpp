@@ -129,7 +129,6 @@ void Screen::ClearchangableWords() {
 
 void Screen::PrintTheBasicMap() {
 	using namespace std;
-  SetConsoleTitle(L"TakeawayAssignmentSystem 1.0 by Group 22");
   // ´òÓ¡×°ÊÎÐÐ
   std::cout << "\n "
                "***************************************************************"
