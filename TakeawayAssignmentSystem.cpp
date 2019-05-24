@@ -11,6 +11,8 @@ int main() {
   // 1 生成公司和基础屏幕
   // 1-1 生成默认公司对象
   Company com1 = Company(3, 11, 14);
+  com1.riderGroup.riders[1].coordinateOfSelf.changeCoordinate(14, 3);
+  com1.riderGroup.riders[2].coordinateOfSelf.changeCoordinate(2, 15);
   // 1-2 运行公司欢迎界面(部分完成)
   com1.welcomeGuide();
   // 1-2 生成默认屏幕对象
@@ -18,8 +20,7 @@ int main() {
   mapScreen.PrintTheBasicMap();
   
   // 1-3 更改位置用于测试
-  com1.riderGroup.riders[1].coordinateOfSelf.changeCoordinate(14, 3);
-  com1.riderGroup.riders[2].coordinateOfSelf.changeCoordinate(2, 15);
+  
 
   // 2 读取SalesList并进行订单分配
   
@@ -45,7 +46,7 @@ int main() {
   mapScreen.PrintChangableElem();
   mapScreen.PrintChangableWords();
   
-
+  
   // 4 运行公司根据指派订单与计算的线路
   for(int i = 0;i<5;i++) {
     
@@ -86,6 +87,7 @@ int main() {
   // 
   system("pause");
 	return 0;
+
 }
 
 
