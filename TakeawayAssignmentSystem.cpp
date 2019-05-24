@@ -22,19 +22,7 @@ int main() {
   com1.riderGroup.riders[2].coordinateOfSelf.changeCoordinate(2, 15);
 
   // 2 读取SalesList并进行订单分配
-  int tempRiderNUM = 0;
-  while (originSalesList.Saleslist.size() &&
-         originSalesList.Saleslist.at(0).time == com1.worldTime) {
-    com1.riderGroup.distributeTheTask(tempRiderNUM, originSalesList.Saleslist.at(0).no,
-                                      originSalesList.Saleslist.at(0).time,
-                                      true,
-                                      originSalesList.Saleslist.at(0).restAddX,
-                                      originSalesList.Saleslist.at(0).restAddY,
-                                      originSalesList.Saleslist.at(0).cusAddX,
-                                      originSalesList.Saleslist.at(0).cusAddY);
-    originSalesList.Saleslist.pop_front();
-	tempRiderNUM += 1;
-  }
+  
 
 
 
@@ -55,18 +43,40 @@ int main() {
   
 
   // 4 运行公司根据指派订单与计算的线路
-  for(int i = 0;i<5;i++){
+  for(int i = 0;i<5;i++) {
+    
+	// 4-1 分配该时刻的订单(暂时为虚假分配)
+	int tempRiderNUM = 0;
+    while (originSalesList.Saleslist.size() &&
+           originSalesList.Saleslist.at(0).time == com1.worldTime) {
+
+      com1.riderGroup.distributeTheTask( tempRiderNUM, originSalesList.Saleslist.at(0).no,
+          originSalesList.Saleslist.at(0).time, true,
+          originSalesList.Saleslist.at(0).restAddX,
+          originSalesList.Saleslist.at(0).restAddY,
+          originSalesList.Saleslist.at(0).cusAddX,
+          originSalesList.Saleslist.at(0).cusAddY);
+
+      originSalesList.Saleslist.pop_front();
+
+      tempRiderNUM += 1;
+    }
+	// 4-2 加载屏幕数据并打印活动内容
     mapScreen.ReloadTheScreenData(com1);
     mapScreen.PrintChangableElem();
 	mapScreen.PrintChangableWords();
-    // TODO::请利用run的返回值进行停止结算
+    com1.outputThisTime.resetMe(); // 屏幕对象获取当前公司在输出对象后，reset这一对象
+    // 4-3 根据订单分配与路线图运行公司并更新数据与Thistime对象
 	com1.runAndUpdateCompany();
     Sleep(1000);
+	// 4-4 清理活跃元素
 	mapScreen.ClearChangableElem();
   }
+  // 打印最后一次元素
   mapScreen.ReloadTheScreenData(com1);
   mapScreen.PrintChangableElem();
   mapScreen.PrintChangableWords();
+
   //
   //getchar();
   // 
