@@ -25,6 +25,7 @@ int main() {
   com1.riderGroup.riders.at(1).theRoute.addBackCustomCoordinate(12, 3);
   com1.riderGroup.riders.at(1).theRoute.addBackCustomCoordinate(12, 3);
   com1.riderGroup.riders.at(1).theRoute.addBackCustomCoordinate(10, 3);
+  com1.riderGroup.riders.at(1).theRoute.addBackCustomCoordinate(10, 3);
   //
   com1.riderGroup.riders.at(0).theRoute.addBackCustomCoordinate(11, 12);
   com1.riderGroup.riders.at(0).theRoute.addBackCustomCoordinate(11, 10);

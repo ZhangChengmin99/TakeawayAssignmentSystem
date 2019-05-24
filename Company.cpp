@@ -4,6 +4,7 @@
 
 #include "Company.h"
 #include <iomanip>
+#include <Windows.h>
 
 Company::Company() {
   totalAsset = 1000;
@@ -76,6 +77,8 @@ int Company::receiveDistributeTheTask(int no, int time, int restaurantAddX,
 }
 
 void Company::welcomeGuide() {
+  SetConsoleTitle(L"TakeawayAssignmentSystem 1.0 by Group 22");
+  
   std::cout << "WELCOME TO TAKEAWAY ASSIGNMENT SYSTEM!\n";
   std::cout << "In the beginning, let's name our company!\n";
   std::cout << "Please enter the name: ";
