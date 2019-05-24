@@ -106,7 +106,7 @@ void Company::welcomeGuide() {
   gotoxy(39, 6);
   cout << "GREAT ! YOUR COMPANY : " << left << setw(10) << name << " SET UP!";
   // ·µ»Ø´òÓ¡Î»ÖÃ
-  gotoxy(116,8);
+  gotoxy(0,8);
   worldTime += 1;
   Sleep(1000);
 }

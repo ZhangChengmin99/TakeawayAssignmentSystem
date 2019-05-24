@@ -1,4 +1,5 @@
 #include "Company.h"
+#include "SalesList.h"
 
 void unitTestOfCoordinate();
 void unitTestOfTasksItem();
@@ -7,9 +8,10 @@ void unitTestOfTasksItemList();
 void unitTestOfRider();
 void unitTestOfRiders();
 void unitTestOfCompany();
+void unitTestOfSalesList();
 void unitTest();
-
-//int main() {
+/*
+int main() {
 //      unitTestOfCoordinate();
 //      unitTestOfTasksItem();
 //      unitTestOfRoute();
@@ -17,9 +19,10 @@ void unitTest();
 //      unitTestOfRider();
 //      unitTestOfRiders();
 //      unitTestOfCompany();
-//	  unitTest();
-//}
-
+//	    unitTest();
+//      unitTestOfSalesList();
+}
+*/
 void unitTestOfTasksItem() {
   std::cout << "UNIT:TEST:OF:TASKSITEM:\n";
   TasksItem task1 = TasksItem(1, 1, false, 2, 4, 4, 6, 6);
@@ -172,6 +175,16 @@ void unitTest() {
   }
   company2.runAndUpdateCompany();
   company2.printCompanyInfo();
+}
 
- 
+void unitTestOfSalesList(){
+  using namespace std;
+  
+  
+  SalesList lists;
+  //检查数据合法性
+  lists.PrintSalsesList();
+  
+  //关闭文件输入流
+  system("pause");
 }

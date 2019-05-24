@@ -157,6 +157,7 @@
     <ClCompile Include="Rider.cpp" />
     <ClCompile Include="Riders.cpp" />
     <ClCompile Include="Route.cpp" />
+    <ClCompile Include="SalesList.cpp" />
     <ClCompile Include="Screen.cpp" />
     <ClCompile Include="TakeawayAssignmentSystem.cpp" />
     <ClCompile Include="TasksItem.cpp" />
@@ -170,9 +171,13 @@
     <ClInclude Include="Rider.h" />
     <ClInclude Include="Riders.h" />
     <ClInclude Include="Route.h" />
+    <ClInclude Include="SalesList.h" />
     <ClInclude Include="Screen.h" />
     <ClInclude Include="TasksItem.h" />
     <ClInclude Include="TasksItemList.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="sales.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

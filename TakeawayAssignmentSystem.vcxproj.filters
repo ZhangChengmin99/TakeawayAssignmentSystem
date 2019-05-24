@@ -48,6 +48,9 @@
     <ClCompile Include="OutputDataOfthisTime.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="SalesList.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Coordinate.h">
@@ -77,5 +80,13 @@
     <ClInclude Include="OutputDataOfthisTime.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="SalesList.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="sales.txt">
+      <Filter>资源文件</Filter>
+    </Text>
   </ItemGroup>
 </Project>
