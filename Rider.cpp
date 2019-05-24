@@ -83,4 +83,10 @@ void Rider::tellTheRider() {
   std::cout << "**********************************************\n";
 }
 
+char* Rider::outputThisTime() { 
+	char *output;
+	output = new char[100];
+	std::cout << "ÆïÊÖ" << id ;
+	return nullptr; }
+
 int Rider::getTheTotalProfit() { return totalProfitGet; }

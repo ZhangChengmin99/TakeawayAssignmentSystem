@@ -65,12 +65,22 @@ int Company::receiveDistributeTheTask(int no, int time, int restaurantAddX,
   int buyRidersJudgeNum = 0;
   int distributeRiderNo = -1;
   // TODO:: 经过匹配度计算计算出匹配骑手若需要购买骑手请先返回购买数量不执行分配语句
+  buyRidersJudgeNum = 1;
   if (!buyRidersJudgeNum) {
     riderGroup.distributeTheTask(distributeRiderNo, no, time, true,
                                  restaurantAddX, restaurantAddY, customerAddX,
-                                 customerAddY);
+                                 customerAddY) ;
+	
 	// 
     receiveTaskNum += 1;
+  } else {
+	  if(buyRiders(1)){
+      riderGroup.distributeTheTask(riderGroup.riders.size()-1, no, time, true,
+                                   restaurantAddX, restaurantAddY, customerAddX,
+                                   customerAddY);
+	  } else {
+
+	  }
   }
   
   return buyRidersJudgeNum;
@@ -124,6 +134,7 @@ void Company::runAndUpdateCompany() {
   finishedTaskNum += outputThisTime.thisTimeFinishedTaskNO.size();
   outTimeTaskNum += outputThisTime.thisTimeFINEDTaskNO.size();
   totalAsset += outputThisTime.thisTimeProfitBesidesFINE - outputThisTime.thisTimeFINE;
+
   
 }
 

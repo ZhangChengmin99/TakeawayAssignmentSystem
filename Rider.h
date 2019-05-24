@@ -6,6 +6,7 @@
 #define TAKEAWAYASSIGNMENT0_1_RIDER_H
 
 #include "Route.h"
+#include <string>
 #include "TasksItemList.h"
 #include "OutputDataOfthisTime.h"
 
@@ -32,6 +33,7 @@ class Rider {
                                        int customerAddX, int customerAddY);
   int getTheTotalProfit();
   void tellTheRider();
+  char* outputThisTime();
   void updateMytaskListStateAfterMovement(int time);
   OutputDataOfthisTime returnOutputDataOfthisTimeAndPopFinishedTasks(int time);
 };

@@ -1,6 +1,7 @@
 #include "SalesList.h"
 
 SalesList::SalesList() {
+
   std::fstream infile;
   infile.open("sales.txt");
   assert(infile.is_open());
@@ -16,6 +17,7 @@ SalesList::SalesList() {
   }
   infile.close();
   //关闭文件输入流
+
 }
 
 

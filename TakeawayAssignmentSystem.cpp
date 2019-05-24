@@ -21,7 +21,7 @@ int main() {
   com1.riderGroup.riders[1].coordinateOfSelf.changeCoordinate(14, 3);
   com1.riderGroup.riders[2].coordinateOfSelf.changeCoordinate(2, 15);
 
-  // 2 读取SalesList
+  // 2 读取SalesList并进行订单分配
   int tempRiderNUM = 0;
   while (originSalesList.Saleslist.size() &&
          originSalesList.Saleslist.at(0).time == com1.worldTime) {
@@ -35,6 +35,7 @@ int main() {
     originSalesList.Saleslist.pop_front();
 	tempRiderNUM += 1;
   }
+
 
 
   // 3 假装分配路线
@@ -58,7 +59,7 @@ int main() {
     mapScreen.ReloadTheScreenData(com1);
     mapScreen.PrintChangableElem();
 	mapScreen.PrintChangableWords();
-    //
+    // TODO::请利用run的返回值进行停止结算
 	com1.runAndUpdateCompany();
     Sleep(1000);
 	mapScreen.ClearChangableElem();
