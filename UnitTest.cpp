@@ -136,7 +136,7 @@ void unitTestOfRiders() {
   ridersGroup1.tellAllRidersInfo();
   ridersGroup1.updateAllRidertaskListStateAfterMovement(30);
   ridersGroup1.tellAllRidersInfo();
-  ridersGroup1.allRidersActionLoopAndReturnProfit(30);
+  
   ridersGroup1.tellAllRidersInfo();
   std::cout << "theFinalProfit: " << ridersGroup1.getTheFinalProfit() << "$\n";
   Riders riderGroup2;

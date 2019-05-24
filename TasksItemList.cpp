@@ -23,9 +23,18 @@ OutputDataOfthisTime TasksItemList::returnOutputDataOfthisTimeAndPopFinishedTask
       tempOutput.thisTimeFINEDTaskNO.push_back(
           taskItems.at(i).checkWhetherOutTimeAndReturnOutTimeTaskNo(time));
 	}
-	  // 返回完成订单编号
-        
+	  // 返回完成订单编号并计算获得利润不计罚款
+	if(taskItems.at(i).ReturnFinishedTaskNo(time)!=-1){
+          tempOutput.thisTimeFinishedTaskNO.push_back(taskItems.at(i).ReturnFinishedTaskNo(time));
+          if (taskItems.at(i).getProfit() != -50) {
+			  tempOutput.thisTimeProfitBesidesFINE += 10;
+		  }
+		  // 将完成订单推出队列
+		  taskItems.erase(taskItems.begin()+i);
+	}   
   }
+  // 计算罚款金额
+  tempOutput.thisTimeFINE = (tempOutput.thisTimeFINEDTaskNO.size())*50;
   return tempOutput;
 }
 

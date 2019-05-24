@@ -1,14 +1,33 @@
 #include "Screen.h"
 #include <windows.h>
+#include <stdlib.h>
+#include <iomanip>
 #include <iostream>
 #include <string>
 
 Screen::Screen() {
 	count = 0;
 	tempLOC.clear();
+    name = new char[100];
+    receiveTaskNum = 0;
+    finishedTaskNum = 0;
+    outTimeTaskNum = 0;
+    worldTime = 0;
+    totalAsset = 0;
+	basementY = 0;
 }
 
-Screen::Screen(Company com1) {
+Screen::Screen(Company com1,int baseY) {
+  name = new char[100];
+  strcpy_s(name, 100, com1.name);
+  receiveTaskNum = com1.receiveTaskNum;
+  finishedTaskNum = com1.finishedTaskNum;
+  outTimeTaskNum = com1.outTimeTaskNum;
+  worldTime = com1.worldTime;
+  totalAsset = com1.totalAsset;
+  tempdata = com1.outputThisTime;
+  basementY = baseY;
+  //
   count = 0;
   tempLOC.clear();
   for (int i = 0; i < com1.riderGroup.riders.size(); i++) {
@@ -23,8 +42,8 @@ Screen::Screen(Company com1) {
 
 void Screen::PrintChangableElem() {
 	using namespace std;
-	for(int i = 0; i<tempLOC.size(); i++) {
-		gotoxy(tempLOC.at(i));
+	for(auto i:tempLOC) {
+		gotoxy(i);
 		cout << "█";
 	}
         tempLoc temp = {0, 69 + basementY};
@@ -37,6 +56,71 @@ void Screen::ClearChangableElem() {
     gotoxy(tempLOC.at(i));
     cout << "  ";
   }
+  tempLoc temp = {0, 69 + basementY};
+  gotoxy(temp);
+}
+
+void Screen::PrintChangableWords() {
+  using namespace std;
+  // 打印时间
+  tempLoc temp = {21,64+basementY};
+  gotoxy(temp);
+  cout << setw(11) << setfill(' ') << worldTime;
+  // 打印金钱
+  temp = {21, 63+basementY};
+  gotoxy(temp);
+  cout << setw(10) << setfill(' ') << totalAsset;
+  // 打印接收单数
+  temp = {21, 65+basementY};
+  gotoxy(temp);
+  cout << setw(11) << setfill(' ') << receiveTaskNum;
+  // 打印完成单数
+  temp = {21, 66+basementY};
+  gotoxy(temp);
+  cout << setw(11) << setfill(' ') << finishedTaskNum;
+  // 打印超时单数
+  temp = {67, 62+basementY};
+  gotoxy(temp);
+  cout << outTimeTaskNum;
+  // 6 打印完成订单编号
+  // 6-1 清理订单编号位置
+  temp = {53, 64+basementY};
+  gotoxy(temp);
+  cout << "                                                             ";
+  // 6-2 打印新内容
+  temp = {53, 64+basementY};
+  gotoxy(temp);
+  if(tempdata.thisTimeFinishedTaskNO.size()==0){
+	  cout << "NO FINISHED TASKS IN THIS TIME!";
+  } else {
+	  for(auto i:tempdata.thisTimeFinishedTaskNO){
+		cout << i << " ";
+	  }
+  }
+  // 7 打印超时订单编号
+  // 7-1 清理订单编号位置
+  temp = {53, 66+basementY};
+  gotoxy(temp);
+  cout << "                                                             ";
+  // 7-2 打印新内容
+  temp = {53, 66+basementY};
+  gotoxy(temp);
+  if (tempdata.thisTimeFINEDTaskNO.size() == 0) {
+    cout << "NO OUTTIME TASKS IN THIS TIME!";
+  } else {
+    for (auto i : tempdata.thisTimeFINEDTaskNO) {
+      cout << i << " ";
+    }
+  }
+
+
+  //
+  temp = {0, 69 + basementY};
+  gotoxy(temp);
+}
+
+void Screen::ClearchangableWords() {
+	// 未用此方法
   tempLoc temp = {0, 69 + basementY};
   gotoxy(temp);
 }
@@ -158,6 +242,25 @@ void Screen::PrintTheBasicMap() {
   cout << "*    ";
   for (int i = 0; i < 8; i++) cout << " ￣￣￣ ￣￣";
   cout << " ￣￣￣     *";
+  using namespace std;
+  cout << "\n "
+          "********************************************************************"
+          "**********************************************\n";
+  cout << " *                                                                  "
+          "                                              *\n";
+  std::cout << " *   Company   Name: " << setw(11) << setfill(' ') << name
+            << "                     OutTimeTaskN:                                                *\n";
+  std::cout << " *   Company Assets:           $                     FinishedTaskNo(thisTime):                                    *\n";
+  std::cout << " *   All World Time:                                                                                              *\n";
+  std::cout << " *   Receive TasksN:                                 OutTimeTaskNo(thisTime):                                     *\n";
+  std::cout << " *   Finished TaskN:                                                                                              *\n";
+  cout << " *                                                            "
+          "      "
+          "                                              *\n";
+  cout << " "
+          "**************************************************************"
+          "******"
+          "**********************************************\n";
   
 }
 
@@ -179,6 +282,7 @@ void Screen::PrintBulidingCenterLine() {
     }
   cout << "|      |    *";
   count += 1;
+  
 }
 
 void Screen::PrintRoadCenterLine() {
@@ -216,7 +320,13 @@ tempLoc Screen::TransLocationToScreenXY(int x, int y) {
 	return tempLOC; 
 }
 
-void Screen::ReloadTheTempLOC(Company com1) {
+void Screen::ReloadTheScreenData(Company com1) {
+  tempdata = com1.outputThisTime;
+  receiveTaskNum = com1.receiveTaskNum;
+  finishedTaskNum = com1.finishedTaskNum;
+  outTimeTaskNum = com1.outTimeTaskNum;
+  worldTime = com1.worldTime;
+  totalAsset = com1.totalAsset;
 	count = 0;
 	tempLOC.clear();
   for (int i = 0; i < com1.riderGroup.riders.size(); i++) {

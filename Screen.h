@@ -12,24 +12,34 @@ typedef struct tempLoc {
 class Screen {
  private:
   std::deque<tempLoc> tempLOC;
-  const int basementY = 0;
+  int basementY = 0;
   int count;
+  OutputDataOfthisTime tempdata;
+  char *name;
+  int receiveTaskNum;
+  int finishedTaskNum;
+  int outTimeTaskNum;
+  int worldTime;
+  int totalAsset;
+
  public:
   Screen();
-  Screen(Company com1);
+  Screen(Company com1,int baseY);
   // 使用擦除函数的打印方式
   void PrintChangableElem();
   void ClearChangableElem();
+  //
+  void PrintChangableWords();
+  void ClearchangableWords();
   void gotoxy(tempLoc tempLOC);
   tempLoc TransLocationToScreenXY(int x, int y);
   //
   void PrintTheBasicMap();
   void PrintBulidingCenterLine();
   void PrintRoadCenterLine();
-  
-  
-  
+  //
+
   // *************************
-  void ReloadTheTempLOC(Company com1);
+  void ReloadTheScreenData(Company com1);
   ~Screen();
 };

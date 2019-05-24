@@ -10,7 +10,7 @@
 #include "OutputDataOfthisTime.h"
 
 class Company {
- private:
+ public:
   char *name;
   int x;
   int y;

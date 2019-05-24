@@ -93,9 +93,12 @@ void Company::runAndUpdateCompany() {
   //    updateAllRidertaskListStateAfterMovement(time);
   worldTime += 1;
   // TODO::同时返回完成单数与超时单数
-  OutputDataOfthisTime tempOutput;
 
-  tempOutput = riderGroup.allRidersActionLoopAndReturnProfit(worldTime);
+  outputThisTime = riderGroup.allRidersActionLoopAndReturnProfit(worldTime);
+  
+  finishedTaskNum += outputThisTime.thisTimeFinishedTaskNO.size();
+  outTimeTaskNum += outputThisTime.thisTimeFINEDTaskNO.size();
+  totalAsset += outputThisTime.thisTimeProfitBesidesFINE - outputThisTime.thisTimeFINE;
   
 }
 
