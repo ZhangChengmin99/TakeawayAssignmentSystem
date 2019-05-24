@@ -40,6 +40,10 @@ int main() {
   //
   com1.riderGroup.riders.at(0).theRoute.addBackCustomCoordinate(11, 4);
   //
+
+  // 打印第1时刻出生时刻位置
+  mapScreen.PrintChangableElem();
+  mapScreen.PrintChangableWords();
   
 
   // 4 运行公司根据指派订单与计算的线路
@@ -61,21 +65,21 @@ int main() {
 
       tempRiderNUM += 1;
     }
-	// 4-2 加载屏幕数据并打印活动内容
+    // 4-2 根据screen对象中所存的上一秒信息清理屏幕
+    Sleep(1000);
+    mapScreen.ClearChangableElem();
+	// 4-3 运行公司并更新其中thistime数据
+    com1.runAndUpdateCompany();
+	// 时间运行之后
+	// 4-4 重新加载屏幕数据
     mapScreen.ReloadTheScreenData(com1);
+    // 4-5 根据重新加载的屏幕数据进行打印活动对象
     mapScreen.PrintChangableElem();
 	mapScreen.PrintChangableWords();
+	// 4-6 重置公司内thistime数据
     com1.outputThisTime.resetMe(); // 屏幕对象获取当前公司在输出对象后，reset这一对象
-    // 4-3 根据订单分配与路线图运行公司并更新数据与Thistime对象
-	com1.runAndUpdateCompany();
-    Sleep(1000);
-	// 4-4 清理活跃元素
-	mapScreen.ClearChangableElem();
   }
-  // 打印最后一次元素
-  mapScreen.ReloadTheScreenData(com1);
-  mapScreen.PrintChangableElem();
-  mapScreen.PrintChangableWords();
+ 
 
   //
   //getchar();
