@@ -51,6 +51,9 @@
     <ClCompile Include="SalesList.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="tempBesidesLOC.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Coordinate.h">
@@ -81,6 +84,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="SalesList.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="tempBesidesLOC.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

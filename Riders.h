@@ -23,6 +23,7 @@ class Riders {
   OutputDataOfthisTime allRidersActionLoopAndReturnProfit(int time);
   OutputDataOfthisTime allRidersReturnProfitNoMove(int time);
   void tellAllRidersInfo();
+  void theOutputOfRiders();
   bool distributeTheTask(int riderId, int no, int receiveTime1,
                          bool contributionState1, int restaurantAddX,
                          int restaurantAddY, int customerAddX,

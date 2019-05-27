@@ -267,7 +267,9 @@ void Company::runAndUpdateCompany() {
   for (auto i : outputThisTime.thisTimeFINEDTaskNO) {
     outfile << i << " ";
   }
-  outfile << "£»" << endl << endl;
+  outfile << "£»" << endl ;
+  riderGroup.theOutputOfRiders();
+  outfile << endl;
 
   
 }
@@ -298,7 +300,9 @@ void Company::UpdateCompanyInFirstTime() {
   for (auto i : outputThisTime.thisTimeFINEDTaskNO) {
     outfile << i << " ";
   }
-  outfile << "£»" << endl << endl;
+  outfile << "£»" << endl ;
+  riderGroup.theOutputOfRiders();
+  outfile << endl;
 }
 
 void Company::printCompanyInfo() {

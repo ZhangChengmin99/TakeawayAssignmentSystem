@@ -162,6 +162,7 @@
     <ClCompile Include="TakeawayAssignmentSystem.cpp" />
     <ClCompile Include="TasksItem.cpp" />
     <ClCompile Include="TasksItemList.cpp" />
+    <ClCompile Include="tempBesidesLOC.cpp" />
     <ClCompile Include="UnitTest.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -175,6 +176,7 @@
     <ClInclude Include="Screen.h" />
     <ClInclude Include="TasksItem.h" />
     <ClInclude Include="TasksItemList.h" />
+    <ClInclude Include="tempBesidesLOC.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="output.txt" />

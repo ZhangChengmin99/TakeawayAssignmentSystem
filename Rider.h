@@ -9,6 +9,10 @@
 #include <string>
 #include "TasksItemList.h"
 #include "OutputDataOfthisTime.h"
+#include "tempBesidesLOC.h"
+#include <fstream>
+#include <assert.h>
+
 
 class Rider {
  private:
@@ -18,6 +22,7 @@ class Rider {
  public:
   Coordinate coordinateOfSelf;
   TasksItemList theTaskList;
+  tempBesidesLOC tempbesidesLOC;
   Route theRoute;
   // constructor
   Rider();
@@ -33,8 +38,8 @@ class Rider {
                                        int customerAddX, int customerAddY);
   int getTheTotalProfit();
   void tellTheRider();
-  char* outputThisTime();
   void updateMytaskListStateAfterMovement(int time);
+  void outPutThisTimeANDresetTempBesidesLOC();
   OutputDataOfthisTime returnOutputDataOfthisTimeAndPopFinishedTasks(int time);
 };
 

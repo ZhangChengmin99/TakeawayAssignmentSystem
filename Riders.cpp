@@ -100,3 +100,9 @@ void Riders::tellAllRidersInfo() {
   for (auto temp : riders) temp.tellTheRider();
   std::cout << "*******************************************************\n";
 }
+
+void Riders::theOutputOfRiders() {
+  for (int i = 0 ;i <riders.size();i++) {
+    riders.at(i).outPutThisTimeANDresetTempBesidesLOC();
+  }
+}

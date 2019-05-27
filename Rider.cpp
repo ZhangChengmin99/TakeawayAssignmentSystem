@@ -50,17 +50,72 @@ int Rider::intimateMyRouteAndReturnIncreasedStepsNum(
 }
 
 void Rider::updateMytaskListStateAfterMovement(int time) {
+	
   for (int i = 0; i < Rider::theTaskList.taskItems.size(); i++) {
+    bool fetchchange = false;
+    bool sendchange = false;
     if (Rider::coordinateOfSelf.insideJudgeFromAnother(
             theTaskList.taskItems[i].restaurantAdd)) {
+      fetchchange = true;
       theTaskList.taskItems[i].changeFetchGoodState(true);
     }
     if (Rider::coordinateOfSelf.insideJudgeFromAnother(
             theTaskList.taskItems[i].customerAdd) &&
         theTaskList.taskItems[i].fetchGoodState) {
+      sendchange = true;
       theTaskList.taskItems[i].changeSendDetailAndReturnFinishedTaskNo(true, time);
     }
+	if (sendchange && fetchchange) {
+      tempbesidesLOC.pushLOC(tempBesidesLOC::resANDcus,
+              theTaskList.taskItems[i].customerAdd.returnTheXPosition(),
+              theTaskList.taskItems[i].customerAdd.returnTheYPosition());
+	  continue;
+	}
+    if (sendchange == true && fetchchange == false) {
+          tempbesidesLOC.pushLOC(
+              tempBesidesLOC::customer,
+              theTaskList.taskItems[i].customerAdd.returnTheXPosition(),
+              theTaskList.taskItems[i].customerAdd.returnTheYPosition());
+      continue;
+    }
+    if (sendchange == false && fetchchange == true) {
+      tempbesidesLOC.pushLOC(
+          tempBesidesLOC::restraunt,
+          theTaskList.taskItems[i].restaurantAdd.returnTheXPosition(),
+          theTaskList.taskItems[i].restaurantAdd.returnTheYPosition());
+      continue;
+    }
+
   }
+}
+
+void Rider::outPutThisTimeANDresetTempBesidesLOC() {
+	using namespace std;
+  ofstream outfile;
+  outfile.open("output.txt", ios::app);
+  outfile << "骑手"<< id << "位置：" << coordinateOfSelf.returnTheXPosition() << "，"
+          << coordinateOfSelf.returnTheYPosition() << "；停靠：";
+  if(!tempbesidesLOC.restrantLOC.empty()) {
+    outfile << "餐馆 ";
+	  for(auto i:tempbesidesLOC.restrantLOC){
+      outfile << i.x << " " << i.y << " ";
+	  }
+  }
+  if (!tempbesidesLOC.customerLOC.empty()) {
+    outfile << "食客 ";
+    for (auto i : tempbesidesLOC.customerLOC) {
+      outfile << i.x << " " << i.y << " ";
+    }
+  }
+  if (!tempbesidesLOC.resANDcusLOC.empty()) {
+    outfile << "餐客 ";
+    for (auto i : tempbesidesLOC.resANDcusLOC) {
+      outfile << i.x << " " << i.y << " ";
+    }
+  }
+  outfile << "；" << endl;
+  outfile.close();
+  tempbesidesLOC.resetMe();
 }
 
 OutputDataOfthisTime Rider::returnOutputDataOfthisTimeAndPopFinishedTasks(int time) {
@@ -81,13 +136,6 @@ void Rider::tellTheRider() {
   Rider::theTaskList.tellTasksItemList();
   std::cout << "5.The Total Profit Gets: " << totalProfitGet << "$\n";
   std::cout << "**********************************************\n";
-}
-
-char* Rider::outputThisTime() { 
-	char *output;
-	output = new char[100];
-	std::cout << "骑手" << id ;
-	return nullptr; 
 }
 
 int Rider::getTheTotalProfit() { return totalProfitGet; }
