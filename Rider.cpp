@@ -56,13 +56,15 @@ void Rider::updateMytaskListStateAfterMovement(int time) {
     bool fetchchange = false;
     bool sendchange = false;
     if (Rider::coordinateOfSelf.insideJudgeFromAnother(
-            theTaskList.taskItems[i].restaurantAdd)) {
+            theTaskList.taskItems[i].restaurantAdd) && (!
+        theTaskList.taskItems[i].fetchGoodState)) {
       fetchchange = true;
       theTaskList.taskItems[i].changeFetchGoodState(true);
     }
     if (Rider::coordinateOfSelf.insideJudgeFromAnother(
             theTaskList.taskItems[i].customerAdd) &&
-        theTaskList.taskItems[i].fetchGoodState) {
+        theTaskList.taskItems[i].fetchGoodState &&
+        (!theTaskList.taskItems[i].sendGoodState)) {
       sendchange = true;
       theTaskList.taskItems[i].changeSendDetailAndReturnFinishedTaskNo(true, time);
     }
