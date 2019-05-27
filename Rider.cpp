@@ -46,7 +46,7 @@ int Rider::intimateMyRouteAndReturnIncreasedStepsNum(
   int inimatedAllStep = -1;
   // TODO::计算部分
   //
-  return inimatedAllStep - theRoute.routes.size();
+  return 0;
 }
 
 void Rider::updateMytaskListStateAfterMovement(int time) {
@@ -87,6 +87,7 @@ char* Rider::outputThisTime() {
 	char *output;
 	output = new char[100];
 	std::cout << "骑手" << id ;
-	return nullptr; }
+	return nullptr; 
+}
 
 int Rider::getTheTotalProfit() { return totalProfitGet; }

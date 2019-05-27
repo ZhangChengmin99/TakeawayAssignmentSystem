@@ -54,7 +54,7 @@ int TasksItem::changeSendDetailAndReturnFinishedTaskNo(bool state, int arrivedTi
 
 int TasksItem::ReturnFinishedTaskNo(int worldTime) { 
 	
-	if ((arrivedTime != -1) && (receiveTime != -1)&&sendGoodState) {
+  if ((arrivedTime != -1) && (receiveTime != -1)&&sendGoodState) {
     if (arrivedTime - receiveTime < 31) {
       profit = 10;
       return num;

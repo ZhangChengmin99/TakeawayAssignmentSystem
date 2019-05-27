@@ -21,6 +21,7 @@ class Riders {
   void changeCoordinateOfAllRidersByRoutes();
   OutputDataOfthisTime returnOutputDataOfthisTimeAndPopFinishedTasks(int time);
   OutputDataOfthisTime allRidersActionLoopAndReturnProfit(int time);
+  OutputDataOfthisTime allRidersReturnProfitNoMove(int time);
   void tellAllRidersInfo();
   bool distributeTheTask(int riderId, int no, int receiveTime1,
                          bool contributionState1, int restaurantAddX,

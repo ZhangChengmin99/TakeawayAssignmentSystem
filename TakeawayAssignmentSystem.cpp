@@ -5,7 +5,11 @@
 #include "SalesList.h"
 
 int main() {
+
   using namespace std;
+  ofstream outfile;
+  outfile.open("output.txt", ios::out);
+  outfile.close();
   // 0 生成预处理队列对象并自动导入数据
   SalesList originSalesList;
   // 1 生成公司和基础屏幕
@@ -41,28 +45,62 @@ int main() {
   //
   
   //
+  // 由于以下实现存在问题所以第1时刻单独运行
+  int riderNUM = 0;
+  // 4-1 分配该时刻的订单(暂时为虚假分配)
+  while (originSalesList.Saleslist.size() &&
+         originSalesList.Saleslist.at(0).time == 1) {
+    com1.riderGroup.distributeTheTask(
+        riderNUM, originSalesList.Saleslist.at(0).no,
+        originSalesList.Saleslist.at(0).time, true,
+        originSalesList.Saleslist.at(0).restAddX,
+        originSalesList.Saleslist.at(0).restAddY,
+        originSalesList.Saleslist.at(0).cusAddX,
+        originSalesList.Saleslist.at(0).cusAddY);
+    /*com1.receiveDistributeTheTask(originSalesList.Saleslist.at(0).no,
+                                  originSalesList.Saleslist.at(0).time,
+                                  originSalesList.Saleslist.at(0).restAddX,
+                                  originSalesList.Saleslist.at(0).restAddY,
+                                  originSalesList.Saleslist.at(0).cusAddX,
+                                  originSalesList.Saleslist.at(0).cusAddY);*/
 
-  // 打印第1时刻出生时刻位置
+    originSalesList.Saleslist.pop_front();
+    riderNUM += 1;
+  }
+  com1.UpdateCompanyInFirstTime();
+  mapScreen.ReloadTheScreenData(com1);
   mapScreen.PrintChangableElem();
   mapScreen.PrintChangableWords();
+  com1.outputThisTime.resetMe();  
+  // 屏幕对象获取当前公司在输出对象后，reset这一对象，但在screen中留有数据
 
   int runState = 1;
+
+  
   // 4 运行公司根据指派订单与计算的线路
-  for(int i = 0;i<31;i++) {
+  for(int i = 0;i<6;i++) {
+	riderNUM = 0;
 	// 4-1 分配该时刻的订单(暂时为虚假分配)
     while (originSalesList.Saleslist.size() &&
            originSalesList.Saleslist.at(0).time == com1.worldTime) {
-          com1.receiveDistributeTheTask(originSalesList.Saleslist.at(0).no,
-              originSalesList.Saleslist.at(0).time,
-              originSalesList.Saleslist.at(0).restAddX,
-              originSalesList.Saleslist.at(0).restAddY,
-              originSalesList.Saleslist.at(0).cusAddX,
-              originSalesList.Saleslist.at(0).cusAddY);
-
+            com1.riderGroup.distributeTheTask(riderNUM,
+                                        originSalesList.Saleslist.at(0).no,
+                                        originSalesList.Saleslist.at(0).time, true,
+          originSalesList.Saleslist.at(0).restAddX,
+          originSalesList.Saleslist.at(0).restAddY,
+          originSalesList.Saleslist.at(0).cusAddX,
+          originSalesList.Saleslist.at(0).cusAddY);
+      /*com1.receiveDistributeTheTask(originSalesList.Saleslist.at(0).no,
+                                    originSalesList.Saleslist.at(0).time,
+                                    originSalesList.Saleslist.at(0).restAddX,
+                                    originSalesList.Saleslist.at(0).restAddY,
+                                    originSalesList.Saleslist.at(0).cusAddX,
+                                    originSalesList.Saleslist.at(0).cusAddY);*/
       originSalesList.Saleslist.pop_front();
+	  riderNUM += 1;
     }
     // 4-2 根据screen对象中所存的上一秒信息清理屏幕
-    Sleep(500);
+    Sleep(1000);
     mapScreen.ClearChangableElem();
 	// 4-3 运行公司并更新其中thistime数据，在run中time+=1，同时会更新com内的thistime
     com1.runAndUpdateCompany();
@@ -76,8 +114,6 @@ int main() {
     com1.outputThisTime.resetMe(); // 屏幕对象获取当前公司在输出对象后，reset这一对象，但在screen中留有数据
 
   }
- 
-
   //
   //getchar();
   // 

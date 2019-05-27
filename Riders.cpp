@@ -89,6 +89,11 @@ OutputDataOfthisTime Riders::allRidersActionLoopAndReturnProfit(int time) {
   return returnOutputDataOfthisTimeAndPopFinishedTasks(time);
 }
 
+OutputDataOfthisTime Riders::allRidersReturnProfitNoMove(int time) {
+  updateAllRidertaskListStateAfterMovement(time);
+  return returnOutputDataOfthisTimeAndPopFinishedTasks(time);
+}
+
 void Riders::tellAllRidersInfo() {
   std::cout << "*******************************************************\n";
   std::cout << "AllRidersInfo:\n";
