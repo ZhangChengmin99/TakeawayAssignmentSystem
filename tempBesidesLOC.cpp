@@ -16,15 +16,18 @@ bool tempBesidesLOC::pushLOC(type type1, int x, int y) {
   if ((!(x % 2)) && (!(y % 2))) {
     BesidesLOC temp = {x, y};
     switch (type1) {
-    restraunt : 
-        restrantLOC.push_back(temp);
-        break;
-	customer : 
-        customerLOC.push_back(temp);
-		break;
-    resANDcus : 
-        resANDcusLOC.push_back(temp);
-		break;
+	case resruant : {
+      restrantLOC.push_back(temp);
+      break;
+    }
+    case customer : {
+      customerLOC.push_back(temp);
+      break;
+	}
+    case resANDcus : {
+      resANDcusLOC.push_back(temp);
+      break;
+	}
     }
   } else {
     return false;

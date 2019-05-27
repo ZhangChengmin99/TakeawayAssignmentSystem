@@ -8,11 +8,11 @@ typedef struct BesidesLOC {
 
 class tempBesidesLOC {
  public:
-	 enum type{
-		 restraunt,
-		 customer,
-		 resANDcus
-	 } ;
+enum type {
+	resruant,
+	customer,
+	resANDcus
+};
   std::deque<BesidesLOC> restrantLOC;
   std::deque<BesidesLOC> customerLOC;
   std::deque<BesidesLOC> resANDcusLOC;

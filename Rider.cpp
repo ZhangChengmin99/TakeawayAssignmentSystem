@@ -14,6 +14,7 @@ Rider::Rider(int id1, int x, int y) {
   id = id1;  // id应该从总骑手数组中引用,通过id1传入
   totalProfitGet = 0;
   coordinateOfSelf = Coordinate(x, y);
+  tempbesidesLOC = tempBesidesLOC();
   // 其余三个数据结构调用默认构造器
 }
 
@@ -66,26 +67,41 @@ void Rider::updateMytaskListStateAfterMovement(int time) {
       theTaskList.taskItems[i].changeSendDetailAndReturnFinishedTaskNo(true, time);
     }
 	if (sendchange && fetchchange) {
-      tempbesidesLOC.pushLOC(tempBesidesLOC::resANDcus,
-              theTaskList.taskItems[i].customerAdd.returnTheXPosition(),
-              theTaskList.taskItems[i].customerAdd.returnTheYPosition());
+      if ((theTaskList.taskItems[i].customerAdd.returnTheXPosition() ==
+               theTaskList.taskItems[i].restaurantAdd.returnTheXPosition()) &&
+              (theTaskList.taskItems[i].customerAdd.returnTheYPosition() ==
+               theTaskList.taskItems[i].restaurantAdd.returnTheYPosition())){
+            tempbesidesLOC.pushLOC(
+                tempBesidesLOC::resANDcus,
+                theTaskList.taskItems[i].customerAdd.returnTheXPosition(),
+                theTaskList.taskItems[i].customerAdd.returnTheYPosition());
+      } else {
+        tempbesidesLOC.pushLOC(
+            tempBesidesLOC::customer,
+            theTaskList.taskItems[i].customerAdd.returnTheXPosition(),
+            theTaskList.taskItems[i].customerAdd.returnTheYPosition());
+        tempbesidesLOC.pushLOC(
+            tempBesidesLOC::resruant,
+            theTaskList.taskItems[i].restaurantAdd.returnTheXPosition(),
+            theTaskList.taskItems[i].restaurantAdd.returnTheYPosition());
+	  }
+      
 	  continue;
 	}
     if (sendchange == true && fetchchange == false) {
           tempbesidesLOC.pushLOC(
-              tempBesidesLOC::customer,
+          tempBesidesLOC::customer,
               theTaskList.taskItems[i].customerAdd.returnTheXPosition(),
               theTaskList.taskItems[i].customerAdd.returnTheYPosition());
       continue;
     }
     if (sendchange == false && fetchchange == true) {
       tempbesidesLOC.pushLOC(
-          tempBesidesLOC::restraunt,
+          tempBesidesLOC::resruant,
           theTaskList.taskItems[i].restaurantAdd.returnTheXPosition(),
           theTaskList.taskItems[i].restaurantAdd.returnTheYPosition());
       continue;
     }
-
   }
 }
 

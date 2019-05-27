@@ -258,7 +258,7 @@ void Company::runAndUpdateCompany() {
   ofstream outfile;
   outfile.open("output.txt", ios::app);
 
-  outfile << "时间：" << worldTime << endl << "钱：" << totalAsset << endl << "接单数：" << receiveTaskNum << endl << "完成数：" << receiveTaskNum << "；" << "结单：";
+  outfile << "时间：" << worldTime << endl << "钱：" << totalAsset << endl << "接单数：" << receiveTaskNum << endl << "完成数：" << finishedTaskNum << "；" << "结单：";
   for (auto i:outputThisTime.thisTimeFinishedTaskNO) {
     outfile << i << " ";
   }
@@ -289,7 +289,7 @@ void Company::UpdateCompanyInFirstTime() {
   outfile << "时间：" << worldTime << endl
           << "钱：" << totalAsset << endl
           << "接单数：" << receiveTaskNum << endl
-          << "完成数：" << receiveTaskNum << "；"
+          << "完成数：" << finishedTaskNum << "；"
           << "结单：";
   for (auto i : outputThisTime.thisTimeFinishedTaskNO) {
     outfile << i << " ";
