@@ -8,6 +8,7 @@
 #include <string>
 #include "Riders.h"
 #include "OutputDataOfthisTime.h"
+#define FITLIMIT 30
 
 class Company {
  public:
@@ -29,7 +30,7 @@ class Company {
   void welcomeGuide();
   void runAndUpdateCompany();
   // 分配任务并在无法分配建议购买骑手时返回数值正整数，无须购买时返回0
-  int  receiveDistributeTheTask(int no, int time, int restaurantAddX,
+  void  receiveDistributeTheTask(int no, int time0, int restaurantAddX,
                                 int restaurantAddY, int customerAddX,
                                 int customerAddY);
   void printCompanyInfo();

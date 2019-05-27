@@ -26,6 +26,7 @@ class Riders {
                          bool contributionState1, int restaurantAddX,
                          int restaurantAddY, int customerAddX,
                          int customerAddY);
+  int stepDistance(int riderX, int riderY, int destinationX, int destinationY);
 };
 
 #endif  // TAKEAWAYASSIGNMENT0_1_RIDERS_H

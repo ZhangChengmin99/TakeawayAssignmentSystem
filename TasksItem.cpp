@@ -65,7 +65,7 @@ int TasksItem::ReturnFinishedTaskNo(int worldTime) {
 
 // 当前超时才算超时
 int TasksItem::checkWhetherOutTimeAndReturnOutTimeTaskNo(int worldTime) {
-  if(worldTime - receiveTime == 31) {
+  if(worldTime - receiveTime == 30 && sendGoodState==false) {
 	  profit = -50;
 	  return num;
   }

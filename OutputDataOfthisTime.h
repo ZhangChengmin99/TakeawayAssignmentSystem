@@ -7,6 +7,8 @@ class OutputDataOfthisTime {
   int thisTimeFINE;               //
   std::deque<int> thisTimeFinishedTaskNO;
   std::deque<int> thisTimeFINEDTaskNO;
+  
+  
   void increaseMySelfFromAnotherOutput(OutputDataOfthisTime AnotherOutput);
   void resetMe();
   OutputDataOfthisTime();

@@ -65,6 +65,23 @@ bool Riders::distributeTheTask(int riderId, int no, int receiveTime1,
   return true;
 }
 
+int Riders::stepDistance(int riderX, int riderY, int destinationX,
+                         int destinationY) {
+    int theStepDistance;
+    if (riderX == destinationX) {
+      theStepDistance = (abs(riderY - destinationY) - 1) / 2;
+    } else if (riderY == destinationY) {
+      theStepDistance = (abs(riderX - destinationX) - 1) / 2;
+    } else if (riderY > destinationY) {
+      theStepDistance =
+          (abs(riderX - destinationX) + (riderY - destinationY - 1)) / 2;
+    } else if (riderY < destinationY) {
+      theStepDistance =
+          (abs(riderX - destinationX) + (riderY - destinationY - 1)) / 2;
+    }
+    return theStepDistance;
+  }
+
 OutputDataOfthisTime Riders::allRidersActionLoopAndReturnProfit(int time) {
   updatetheRouteOfAllRiders();
   changeCoordinateOfAllRidersByRoutes();

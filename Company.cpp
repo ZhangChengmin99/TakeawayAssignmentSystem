@@ -6,6 +6,7 @@
 #include <iomanip>
 #include <Windows.h>
 
+
 Company::Company() {
   totalAsset = 1000;
   x = 8;
@@ -57,34 +58,141 @@ void Company::changeTheCompanyName(char *newName) {
   strcpy_s(name, 100, newName);
 }
 
-int Company::receiveDistributeTheTask(int no, int time, int restaurantAddX,
-                                       int restaurantAddY, int customerAddX,
-                                       int customerAddY) {
+
   // TODO:: 订单分配核心算法
-  // 分配任务并在无法分配建议购买骑手时返回数值正整数，无须购买时返回0
-  int buyRidersJudgeNum = 0;
-  int distributeRiderNo = -1;
-  // TODO:: 经过匹配度计算计算出匹配骑手若需要购买骑手请先返回购买数量不执行分配语句
-  buyRidersJudgeNum = 1;
-  if (!buyRidersJudgeNum) {
-    riderGroup.distributeTheTask(distributeRiderNo, no, time, true,
-                                 restaurantAddX, restaurantAddY, customerAddX,
-                                 customerAddY) ;
-	
-	// 
-    receiveTaskNum += 1;
-  } else {
-	  if(buyRiders(1)){
-      riderGroup.distributeTheTask(riderGroup.riders.size()-1, no, time, true,
+void Company::receiveDistributeTheTask(int no, int time0, int restaurantAddX,
+                                        int restaurantAddY, int customerAddX,
+                                        int customerAddY) {
+    // TODO:: 订单分配核心算法
+    // 分配任务并在无法分配建议购买骑手时返回数值正整数，无须购买时返回0
+    int buyRidersJudgeNum = 0;
+    int distributeRiderNo = -1;
+    int riderNumber = (int)riderGroup.riders.size();
+    // TODO:: 订单分配核心算法
+    if (riderNumber == 1)  //当骑手只有一个人的时候
+    {
+      distributeRiderNo = 0;
+    } else {
+      std::deque<int> fitness;
+      std::deque<int> fitnessCopy;
+      std::deque<int> fitnessSorted;
+      std::deque<int> time;
+      fitness.clear();
+      fitnessCopy.clear();
+      fitnessSorted.clear();
+      time.clear();
+      int distance1 = 0, distance2 = 0, distance3 = 0, time1 = 0,
+          mindistance = 0, time2 = 0;
+      double distanceBetweenRiders = 0;
+      for (int i = 0; i < riderNumber; i++, distanceBetweenRiders = 0) {
+        // distance1计算骑手当前位置与餐馆的距离
+        distance1 = riderGroup.stepDistance(
+            riderGroup.riders.at(i).coordinateOfSelf.returnTheXPosition(),
+            riderGroup.riders.at(i).coordinateOfSelf.returnTheYPosition(),
+            restaurantAddX, restaurantAddY);
+        for (int j = 1, minloc = 0,
+                 mindistance =
+                     riderGroup.stepDistance(riderGroup.riders.at(i)
+                                                 .theRoute.routes.at(0)
+                                                 .returnTheXPosition(),
+                                             riderGroup.riders.at(i)
+                                                 .theRoute.routes.at(0)
+                                                 .returnTheYPosition(),
+                                             customerAddX, customerAddY);
+             j < (int)riderGroup.riders.at(i).theRoute.routes.size(); j++) {
+          if (riderGroup.stepDistance(riderGroup.riders.at(i)
+                                          .theRoute.routes.at(j)
+                                          .returnTheXPosition(),
+                                      riderGroup.riders.at(i)
+                                          .theRoute.routes.at(j)
+                                          .returnTheYPosition(),
+                                      customerAddX,
+                                      customerAddY) < mindistance) {
+            minloc = j;
+            mindistance = riderGroup.stepDistance(riderGroup.riders.at(i)
+                                                      .theRoute.routes.at(j)
+                                                      .returnTheXPosition(),
+                                                  riderGroup.riders.at(i)
+                                                      .theRoute.routes.at(j)
+                                                      .returnTheYPosition(),
+                                                  customerAddX, customerAddY);
+          }
+        }
+        distance2 = mindistance;  // distance2计算骑手的路径中距离客户最近的距离
+        for (int k = 0; k < riderNumber; k++) {
+          distanceBetweenRiders += sqrt(
+              pow(riderGroup.riders.at(k).coordinateOfSelf.returnTheXPosition(),
+                  2) +
+              pow(riderGroup.riders.at(k).coordinateOfSelf.returnTheYPosition(),
+                  2));
+        }
+        distance3 = (int)distanceBetweenRiders /
+                    riderNumber;  // distance3计算骑手之间的距离，代表密度
+        time1 = (int)riderGroup.riders.at(i)
+                    .theRoute.routes.size();  // time1计算骑手现有单数派完所需时间
+        time2 =
+            riderGroup.riders.at(i)
+                .intimateMyRouteAndReturnIncreasedStepsNum(no,time0,true,i,restaurantAddX,restaurantAddY,customerAddX,customerAddY);  // time2计算骑手若被派单增加的时间
+        fitness.push_back(distance1 + distance2 + time1 + 2 * time2 +
+                          distance3);  //计算匹配度（匹配度越小越适合被派单）
+        time.push_back(time1 + time2);  //计算总时间
+      }
+      fitnessCopy = fitness;
+      for (int i = 1, minfitness = fitness.at(0), minfitnessloc = 0;
+           i < (int)fitness.size();
+           i++)  //对匹配度进行排序，将对应骑手的编号用fitnessSorted存储
+      {
+        if (fitness.at(i) < minfitness && fitness.at(i) != -1) {
+          minfitness = fitness.at(i);
+          minfitnessloc = i;
+        }
+        if (minfitness < FITLIMIT) {
+          buyRidersJudgeNum = 1;
+        }
+        fitnessSorted.push_back(minfitnessloc);
+        fitness.erase(fitness.begin() + minfitnessloc);
+        fitness.insert(fitness.begin() + minfitnessloc, -1);
+      }
+      for (int i = 0; i < riderNumber; i++) {
+        if (time.at(fitnessSorted.at(i)) <
+            30)  //当骑手能在30单位时间派完单则派单给该骑手，否则派给下一位骑手
+        {
+          distributeRiderNo = fitnessSorted.at(i);
+        }
+      }
+      if (distributeRiderNo == -1)  //当所有骑手派单都会超时时
+      {
+        for (int i = 0; i < riderNumber; i++) {
+          if (time.at(fitnessSorted.at(i)) <
+              60)  //选择不会超过60单位时间的骑手派单
+          {
+            distributeRiderNo = fitnessSorted.at(i);
+          }
+        }
+      }
+    }
+    // TODO::
+    // 经过匹配度计算计算出匹配骑手若需要购买骑手请先返回购买数量不执行分配语句
+    if (!buyRidersJudgeNum) {
+      riderGroup.distributeTheTask(distributeRiderNo, no, time0, true,
                                    restaurantAddX, restaurantAddY, customerAddX,
                                    customerAddY);
-	  } else {
 
-	  }
+      //
+      receiveTaskNum += 1;
+    } else {
+      if (buyRiders(1)) {
+        riderGroup.distributeTheTask((int)riderGroup.riders.size() - 1, no, time0,
+                                     true, restaurantAddX, restaurantAddY,
+                                     customerAddX, customerAddY);
+      } else {
+        riderGroup.distributeTheTask(distributeRiderNo, no, time0, true,
+                                     restaurantAddX, restaurantAddY,
+                                     customerAddX, customerAddY);
+      }
+    }
   }
-  
-  return buyRidersJudgeNum;
-}
+    
 
 void Company::welcomeGuide() {
 	using namespace std;
