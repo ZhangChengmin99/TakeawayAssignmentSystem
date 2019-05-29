@@ -59,7 +59,7 @@ int main() {
             // 2-2-2-2 根据重新加载的屏幕数据进行打印活动对象
                   mapScreen.PrintChangableElem();
                   mapScreen.PrintChangableWords();
-		    // 2-2-2-3 TODO::根据outputThisTime数据进行终止判断退出循环
+		    // 2-2-2-3 TODO::根据outputThisTime数据进行终止判断退出循环不运行擦除
             // 2-2-2-4 根据screen对象中所存的信息清理屏幕
                   Sleep(1000);
                   mapScreen.ClearChangableElem();
@@ -68,6 +68,8 @@ int main() {
 		 // 2-2-3 行走-time+=1
 				  com1.RunRidersAndWorldTime();
   }
+  mapScreen.PrintChangableElem();
+  mapScreen.PrintChangableWords();
   system("pause");
 	return 0;
 }

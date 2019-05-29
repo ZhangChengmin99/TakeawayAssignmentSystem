@@ -161,8 +161,9 @@ void Company::receiveDistributeTheTask(int no, int time0, int restaurantAddX,
         buyRidersJudgeNum = 1;
       }
       fitnessSorted.push_back(minfitnessloc);
-      fitness.erase(fitness.begin() + minfitnessloc);
-      fitness.insert(fitness.begin() + minfitnessloc, -1);
+      fitness.at(minfitnessloc) = -1;
+      //fitness.erase(fitness.begin() + minfitnessloc);
+      //fitness.insert(fitness.begin() + minfitnessloc, -1);
     }
     distributeRiderNo = fitnessSorted.at(0);
     for (int i = 0; i < riderNumber && time.at(fitnessSorted.at(i)) > 30;

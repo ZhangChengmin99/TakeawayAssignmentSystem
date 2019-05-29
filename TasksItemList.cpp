@@ -29,8 +29,9 @@ OutputDataOfthisTime TasksItemList::returnOutputDataOfthisTimeAndPopFinishedTask
           if (taskItems.at(i).getProfit() != -50) {
 			  tempOutput.thisTimeProfitBesidesFINE += 10;
 		  }
-		  // 将完成订单推出队列
+		  // 将完成订单删除出队列
 		  taskItems.erase(taskItems.begin()+i);
+		  i -= 1; // 关键：由于在遍历过程中删除了元素，所以一定要i-=1
 	}   
   }
   // 计算罚款金额
