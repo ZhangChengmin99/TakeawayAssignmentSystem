@@ -173,7 +173,7 @@ void unitTest() {
   for (int i = 0; i < company2.riderGroup.riders.size(); i++) {
     company2.riderGroup.riders.at(i).theRoute.addBackCustomCoordinate(6, 7);
   }
-  company2.runAndUpdateCompany();
+  company2.UpdateCompany();
   company2.printCompanyInfo();
 }
 

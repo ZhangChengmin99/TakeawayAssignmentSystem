@@ -20,8 +20,7 @@ class Riders {
   void updateAllRidertaskListStateAfterMovement(int time);
   void changeCoordinateOfAllRidersByRoutes();
   OutputDataOfthisTime returnOutputDataOfthisTimeAndPopFinishedTasks(int time);
-  OutputDataOfthisTime allRidersActionLoopAndReturnProfit(int time);
-  OutputDataOfthisTime allRidersReturnProfitNoMove(int time);
+  OutputDataOfthisTime allRidersUpdateTasklist(int time);
   void tellAllRidersInfo();
   void theOutputOfRiders();
   bool distributeTheTask(int riderId, int no, int receiveTime1,

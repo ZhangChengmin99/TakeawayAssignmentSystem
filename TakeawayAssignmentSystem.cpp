@@ -22,104 +22,54 @@ int main() {
   // 1-2 生成默认屏幕对象
   Screen mapScreen(com1,8);
   mapScreen.PrintTheBasicMap();
-  
-  // 1-3 更改位置用于测试
-  
 
-  // 2 读取SalesList并进行订单分配
-  
-
-
-
-  // 3 假装分配路线
+  // 1-3 假装分配路线
   com1.riderGroup.riders.at(1).theRoute.addBackCustomCoordinate(12, 3);
   com1.riderGroup.riders.at(1).theRoute.addBackCustomCoordinate(12, 3);
   com1.riderGroup.riders.at(1).theRoute.addBackCustomCoordinate(12, 3);
   com1.riderGroup.riders.at(1).theRoute.addBackCustomCoordinate(10, 3);
-  
   //
   com1.riderGroup.riders.at(0).theRoute.addBackCustomCoordinate(11, 12);
   com1.riderGroup.riders.at(0).theRoute.addBackCustomCoordinate(11, 10);
   com1.riderGroup.riders.at(0).theRoute.addBackCustomCoordinate(11, 8);
   com1.riderGroup.riders.at(0).theRoute.addBackCustomCoordinate(11, 6);
-  //
-  
-  //
-  // 由于以下实现存在问题所以第1时刻单独运行
-  int riderNUM = 0;
-  // 4-1 分配该时刻的订单(暂时为虚假分配)
-  while (originSalesList.Saleslist.size() &&
-         originSalesList.Saleslist.at(0).time == 1) {
-    com1.riderGroup.distributeTheTask(
-        riderNUM, originSalesList.Saleslist.at(0).no,
-        originSalesList.Saleslist.at(0).time, true,
-        originSalesList.Saleslist.at(0).restAddX,
-        originSalesList.Saleslist.at(0).restAddY,
-        originSalesList.Saleslist.at(0).cusAddX,
-        originSalesList.Saleslist.at(0).cusAddY);
-    /*com1.receiveDistributeTheTask(originSalesList.Saleslist.at(0).no,
-                                  originSalesList.Saleslist.at(0).time,
-                                  originSalesList.Saleslist.at(0).restAddX,
-                                  originSalesList.Saleslist.at(0).restAddY,
-                                  originSalesList.Saleslist.at(0).cusAddX,
-                                  originSalesList.Saleslist.at(0).cusAddY);*/
 
-    originSalesList.Saleslist.pop_front();
-    riderNUM += 1;
-  }
-  com1.UpdateCompanyInFirstTime();
-  mapScreen.ReloadTheScreenData(com1);
-  mapScreen.PrintChangableElem();
-  mapScreen.PrintChangableWords();
-  com1.outputThisTime.resetMe();  
-  // 屏幕对象获取当前公司在输出对象后，reset这一对象，但在screen中留有数据
+  // 2 运行公司运行逻辑
 
-  int runState = 1;
-
-  
-  // 4 运行公司根据指派订单与计算的线路
   for(int i = 0;i<6;i++) {
-	riderNUM = 0;
-	// 4-1 分配该时刻的订单(暂时为虚假分配)
-    while (originSalesList.Saleslist.size() &&
-           originSalesList.Saleslist.at(0).time == com1.worldTime) {
-            com1.riderGroup.distributeTheTask(riderNUM,
-                                        originSalesList.Saleslist.at(0).no,
-                                        originSalesList.Saleslist.at(0).time, true,
-          originSalesList.Saleslist.at(0).restAddX,
-          originSalesList.Saleslist.at(0).restAddY,
-          originSalesList.Saleslist.at(0).cusAddX,
-          originSalesList.Saleslist.at(0).cusAddY);
-      /*com1.receiveDistributeTheTask(originSalesList.Saleslist.at(0).no,
-                                    originSalesList.Saleslist.at(0).time,
-                                    originSalesList.Saleslist.at(0).restAddX,
-                                    originSalesList.Saleslist.at(0).restAddY,
-                                    originSalesList.Saleslist.at(0).cusAddX,
-                                    originSalesList.Saleslist.at(0).cusAddY);*/
-      originSalesList.Saleslist.pop_front();
-	  riderNUM += 1;
-    }
-    // 4-2 根据screen对象中所存的上一秒信息清理屏幕
-    Sleep(1000);
-    mapScreen.ClearChangableElem();
-	// 4-3 运行公司并更新其中thistime数据，在run中time+=1，同时会更新com内的thistime
-    com1.runAndUpdateCompany();
-	// 时间运行之后
-	// 4-4 重新加载屏幕数据
-    mapScreen.ReloadTheScreenData(com1);
-    // 4-5 根据重新加载的屏幕数据进行打印活动对象
-    mapScreen.PrintChangableElem();
-	mapScreen.PrintChangableWords();
-	// 4-6 重置公司内thistime数据
-    com1.outputThisTime.resetMe(); // 屏幕对象获取当前公司在输出对象后，reset这一对象，但在screen中留有数据
-
+	  // 2-1 运行派单逻辑
+          while (originSalesList.Saleslist.size() &&
+                    originSalesList.Saleslist.at(0).time == com1.worldTime) {
+                    com1.receiveDistributeTheTask(originSalesList.Saleslist.at(0).no,
+                                             originSalesList.Saleslist.at(0).time,
+                                             originSalesList.Saleslist.at(0).restAddX,
+                                             originSalesList.Saleslist.at(0).restAddY,
+                                             originSalesList.Saleslist.at(0).cusAddX,
+                                             originSalesList.Saleslist.at(0).cusAddY);
+               originSalesList.Saleslist.pop_front();
+          }
+	  
+		// 2-2 公司运行逻辑 （更新订单状态-输出-更新路线图-行走-time+=1）
+		  
+		  // 2-2-1 更新订单状态-输出文件-更新路线图
+		  com1.UpdateCompany();
+		  // 2-2-2 输出到屏幕
+            // 2-2-2-1 重新加载屏幕数据
+                  mapScreen.ReloadTheScreenData(com1);
+            // 2-2-2-2 根据重新加载的屏幕数据进行打印活动对象
+                  mapScreen.PrintChangableElem();
+                  mapScreen.PrintChangableWords();
+		    // 2-2-2-3 TODO::根据outputThisTime数据进行终止判断退出循环
+            // 2-2-2-4 根据screen对象中所存的信息清理屏幕
+                  Sleep(1000);
+                  mapScreen.ClearChangableElem();
+            // 2-2-2-5 重置公司内thistime数据
+                  com1.outputThisTime.resetMe();
+		 // 2-2-3 行走-time+=1
+				  com1.RunRidersAndWorldTime();
   }
-  //
-  //getchar();
-  // 
   system("pause");
 	return 0;
-
 }
 
 

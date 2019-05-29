@@ -59,7 +59,6 @@ void Company::changeTheCompanyName(char *newName) {
 }
 
 
-  // TODO:: 订单分配核心算法
 void Company::receiveDistributeTheTask(int no, int time0, int restaurantAddX,
                                        int restaurantAddY, int customerAddX,
                                        int customerAddY) {
@@ -138,8 +137,8 @@ void Company::receiveDistributeTheTask(int no, int time0, int restaurantAddX,
       time2 = riderGroup.riders.at(i).intimateMyRouteAndReturnIncreasedStepsNum(
           no, time0, true, i, restaurantAddX, restaurantAddY, customerAddX,
           customerAddY);  // time2计算骑手若被派单增加的时间
-      fitness.push_back(distance1 + distance2 + time1 + 2 * time2 +
-                        distance3);  //计算匹配度（匹配度越小越适合被派单）
+      fitness.push_back(2 * distance1 + 2 * distance2 + time1 + 3 * time2 +
+                        distance3 / 3);  //计算匹配度（匹配度越小越适合被派单）
       time.push_back(time1 + time2);  //计算总时间
     }
     fitnessCopy = fitness;
@@ -152,11 +151,11 @@ void Company::receiveDistributeTheTask(int no, int time0, int restaurantAddX,
         minfitness = fitness.at(j);
         minfitnessloc = j;
       }
-      for (int j = 0; fitness.at(j) < minfitness && fitness.at(j) != -1 &&
-                      j < (int)fitness.size();
-           j++) {
-        minfitness = fitness.at(j);
-        minfitnessloc = j;
+      for (int j = 0; j < (int)fitness.size() && fitness.at(j) != -1; j++) {
+        if (fitness.at(j) < minfitness) {
+          minfitness = fitness.at(j);
+          minfitnessloc = j;
+        }
       }
       if (minfitness > FITLIMIT) {
         buyRidersJudgeNum = 1;
@@ -165,21 +164,17 @@ void Company::receiveDistributeTheTask(int no, int time0, int restaurantAddX,
       fitness.erase(fitness.begin() + minfitnessloc);
       fitness.insert(fitness.begin() + minfitnessloc, -1);
     }
-    for (int i = 0; i < riderNumber; i++) {
-      if (time.at(fitnessSorted.at(i)) <
-          30)  //当骑手能在30单位时间派完单则派单给该骑手，否则派给下一位骑手
-      {
-        distributeRiderNo = fitnessSorted.at(i);
-      }
+    distributeRiderNo = fitnessSorted.at(0);
+    for (int i = 0; i < riderNumber && time.at(fitnessSorted.at(i)) > 30;
+         i++) {  //当骑手能在30单位时间派完单则派单给该骑手，否则派给下一位骑手
+      distributeRiderNo = fitnessSorted.at(i);
     }
     if (distributeRiderNo == -1)  //当所有骑手派单都会超时时
     {
-      for (int i = 0; i < riderNumber; i++) {
-        if (time.at(fitnessSorted.at(i)) <
-            60)  //选择不会超过60单位时间的骑手派单
-        {
-          distributeRiderNo = fitnessSorted.at(i);
-        }
+      for (int i = 0; i < riderNumber && time.at(fitnessSorted.at(i)) > 60;
+           i++) {
+        //选择不会超过60单位时间的骑手派单
+        distributeRiderNo = fitnessSorted.at(i);
       }
     }
   }
@@ -189,9 +184,6 @@ void Company::receiveDistributeTheTask(int no, int time0, int restaurantAddX,
     riderGroup.distributeTheTask(distributeRiderNo, no, time0, true,
                                  restaurantAddX, restaurantAddY, customerAddX,
                                  customerAddY);
-
-    //
-    receiveTaskNum += 1;
   } else {
     if (buyRiders(1)) {
       riderGroup.distributeTheTask((int)riderGroup.riders.size() - 1, no, time0,
@@ -203,6 +195,7 @@ void Company::receiveDistributeTheTask(int no, int time0, int restaurantAddX,
                                    customerAddY);
     }
   }
+  receiveTaskNum += 1;
 }
     
 
@@ -241,20 +234,15 @@ void Company::welcomeGuide() {
   Sleep(1000);
 }
 
-void Company::runAndUpdateCompany() {
+void Company::UpdateCompany() {
 	using namespace std;
-  //	receiveDistributeTheTask
-  //    updatetheRouteOfAllRiders();
-  //    changeCoordinateOfAllRidersByRoutes();
-  //    updateAllRidertaskListStateAfterMovement(time);
-  worldTime += 1;
-  // TODO::同时返回完成单数与超时单数
-
-  outputThisTime = riderGroup.allRidersActionLoopAndReturnProfit(worldTime);
-  
+  // 公司更新逻辑 （更新订单状态 - 输出 - 更新路线图）
+  // 1 更新订单状态
+  outputThisTime = riderGroup.allRidersUpdateTasklist(worldTime);
   finishedTaskNum += outputThisTime.thisTimeFinishedTaskNO.size();
   outTimeTaskNum += outputThisTime.thisTimeFINEDTaskNO.size();
   totalAsset += outputThisTime.thisTimeProfitBesidesFINE - outputThisTime.thisTimeFINE;
+  // 2 输出到文件
   ofstream outfile;
   outfile.open("output.txt", ios::app);
 
@@ -270,39 +258,15 @@ void Company::runAndUpdateCompany() {
   outfile << "；" << endl ;
   riderGroup.theOutputOfRiders();
   outfile << endl;
-
-  
+  // 3 更新骑手路线图
+  riderGroup.updatetheRouteOfAllRiders();
 }
 
-void Company::UpdateCompanyInFirstTime() {
-  using namespace std;
-
-  outputThisTime = riderGroup.allRidersReturnProfitNoMove(worldTime);
-
-  finishedTaskNum += outputThisTime.thisTimeFinishedTaskNO.size();
-  outTimeTaskNum += outputThisTime.thisTimeFINEDTaskNO.size();
-  totalAsset +=
-      outputThisTime.thisTimeProfitBesidesFINE - outputThisTime.thisTimeFINE;
-  ofstream outfile;
-  outfile.open("output.txt", ios::app);
-
-  outfile << "时间：" << worldTime << endl
-          << "钱：" << totalAsset << endl
-          << "接单数：" << receiveTaskNum << endl
-          << "完成数：" << finishedTaskNum << "；"
-          << "结单：";
-  for (auto i : outputThisTime.thisTimeFinishedTaskNO) {
-    outfile << i << " ";
-  }
-  outfile << "；" << endl;
-  outfile << "超时数：" << outTimeTaskNum << "；"
-          << "罚单：";
-  for (auto i : outputThisTime.thisTimeFINEDTaskNO) {
-    outfile << i << " ";
-  }
-  outfile << "；" << endl ;
-  riderGroup.theOutputOfRiders();
-  outfile << endl;
+void Company::RunRidersAndWorldTime() {
+	for(int i = 0 ; i<riderGroup.riders.size(); i++){
+		riderGroup.riders.at(i).changeCoordinateOfSelfByRoutes();
+	}
+	worldTime += 1;
 }
 
 void Company::printCompanyInfo() {
