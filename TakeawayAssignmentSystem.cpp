@@ -7,6 +7,7 @@
 int main() {
 
   using namespace std;
+  // 0 清空上一次的文件内容
   ofstream outfile;
   outfile.open("output.txt", ios::out);
   outfile.close();
@@ -36,7 +37,8 @@ int main() {
 
   // 2 运行公司运行逻辑
 
-  for(int i = 0;i<6;i++) {
+  int state = 0;
+  while(state==0) {
 	  // 2-1 运行派单逻辑
           while (originSalesList.Saleslist.size() &&
                     originSalesList.Saleslist.at(0).time == com1.worldTime) {
@@ -60,6 +62,10 @@ int main() {
                   mapScreen.PrintChangableElem();
                   mapScreen.PrintChangableWords();
 		    // 2-2-2-3 TODO::根据outputThisTime数据进行终止判断退出循环不运行擦除
+				  // 状态 1 结束 : 所有骑手订单已完成，且输入总列表为空
+				  if (originSalesList.Saleslist.empty()&&com1.riderGroup.judgeAllRidersTasklistEmpty()){
+					  state = 1;
+				  }
             // 2-2-2-4 根据screen对象中所存的信息清理屏幕
                   Sleep(1000);
                   mapScreen.ClearChangableElem();

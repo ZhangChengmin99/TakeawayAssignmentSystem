@@ -94,6 +94,14 @@ void Riders::tellAllRidersInfo() {
   std::cout << "*******************************************************\n";
 }
 
+bool Riders::judgeAllRidersTasklistEmpty() { 
+	bool judge = true;
+	for(int i = 0 ; i < riders.size();i++) {
+		if(!riders.at(i).theTaskList.taskItems.empty())
+			judge = false;
+	}
+	return judge; }
+
 void Riders::theOutputOfRiders() {
   for (int i = 0 ;i <riders.size();i++) {
     riders.at(i).outPutThisTimeANDresetTempBesidesLOC();

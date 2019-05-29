@@ -22,6 +22,7 @@ class Riders {
   OutputDataOfthisTime returnOutputDataOfthisTimeAndPopFinishedTasks(int time);
   OutputDataOfthisTime allRidersUpdateTasklist(int time);
   void tellAllRidersInfo();
+  bool judgeAllRidersTasklistEmpty();
   void theOutputOfRiders();
   bool distributeTheTask(int riderId, int no, int receiveTime1,
                          bool contributionState1, int restaurantAddX,
