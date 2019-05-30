@@ -29,7 +29,7 @@ int main() {
   com1.riderGroup.riders.at(1).theRoute.addBackCustomCoordinate(12, 3);
   com1.riderGroup.riders.at(1).theRoute.addBackCustomCoordinate(12, 3);
   com1.riderGroup.riders.at(1).theRoute.addBackCustomCoordinate(10, 3);
-  //
+  
   com1.riderGroup.riders.at(0).theRoute.addBackCustomCoordinate(11, 12);
   com1.riderGroup.riders.at(0).theRoute.addBackCustomCoordinate(11, 10);
   com1.riderGroup.riders.at(0).theRoute.addBackCustomCoordinate(11, 8);
@@ -40,7 +40,7 @@ int main() {
   int state = 0;
   while(state==0) {
 	  // 2-1 运行派单逻辑
-          while (originSalesList.Saleslist.size() &&
+          while (!originSalesList.Saleslist.empty() &&
                     originSalesList.Saleslist.at(0).time == com1.worldTime) {
                     com1.receiveDistributeTheTask(originSalesList.Saleslist.at(0).no,
                                              originSalesList.Saleslist.at(0).time,
@@ -63,11 +63,24 @@ int main() {
                   mapScreen.PrintChangableWords();
 		    // 2-2-2-3 TODO::根据outputThisTime数据进行终止判断退出循环不运行擦除
 				  // 状态 1 结束 : 所有骑手订单已完成，且输入总列表为空
-				  if (originSalesList.Saleslist.empty()&&com1.riderGroup.judgeAllRidersTasklistEmpty()){
-					  state = 1;
+				  // 状态 2 结束 : 破产并且在此刻被吊销执照
+				  // 状态 3 结束 : 破产
+				  // 状态 4 结束 : 吊销执照
+                  if (com1.totalAsset < 0 && !com1.outputThisTime.thisTimeOut60TaskNO.empty()){
+					  state = 2;
+				  } else if(com1.totalAsset < 0) {
+					  state = 3;
+                  } else if (!com1.outputThisTime.thisTimeOut60TaskNO.empty()) {
+					  state = 4;
+				  } else if(
+                      originSalesList.Saleslist.empty() &&
+                      com1.riderGroup.judgeAllRidersTasklistEmpty()) {
+                      state = 1;
+                  } else {
+					  state = 0;
 				  }
             // 2-2-2-4 根据screen对象中所存的信息清理屏幕
-                  Sleep(1000);
+                  Sleep(500);
                   mapScreen.ClearChangableElem();
             // 2-2-2-5 重置公司内thistime数据
                   com1.outputThisTime.resetMe();
@@ -76,6 +89,7 @@ int main() {
   }
   mapScreen.PrintChangableElem();
   mapScreen.PrintChangableWords();
+  cout << state << endl;
   system("pause");
 	return 0;
 }

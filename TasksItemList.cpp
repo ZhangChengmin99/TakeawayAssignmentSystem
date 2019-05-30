@@ -18,12 +18,16 @@ OutputDataOfthisTime TasksItemList::returnOutputDataOfthisTimeAndPopFinishedTask
   OutputDataOfthisTime tempOutput;
   // 遍历所有的订单
   for(int i = 0; i<taskItems.size(); i++) {
-	  // 返回超时订单编号
+	  // 返回当前超时订单编号
 	if(taskItems.at(i).checkWhetherOutTimeAndReturnOutTimeTaskNo(time)!=-1){
       tempOutput.thisTimeFINEDTaskNO.push_back(
           taskItems.at(i).checkWhetherOutTimeAndReturnOutTimeTaskNo(time));
 	}
-	  // 返回完成订单编号并计算获得利润不计罚款
+    if (taskItems.at(i).sendGoodState == false &&
+            time - taskItems.at(i).receiveTime == 61) {
+          tempOutput.thisTimeOut60TaskNO.push_back(taskItems.at(i).num);
+        }
+	  // 返回当前完成订单编号并计算获得利润不计罚款
 	if(taskItems.at(i).ReturnFinishedTaskNo(time)!=-1){
           tempOutput.thisTimeFinishedTaskNO.push_back(taskItems.at(i).ReturnFinishedTaskNo(time));
           if (taskItems.at(i).getProfit() != -50) {
@@ -32,7 +36,8 @@ OutputDataOfthisTime TasksItemList::returnOutputDataOfthisTimeAndPopFinishedTask
 		  // 将完成订单删除出队列
 		  taskItems.erase(taskItems.begin()+i);
 		  i -= 1; // 关键：由于在遍历过程中删除了元素，所以一定要i-=1
-	}   
+	}
+        
   }
   // 计算罚款金额
   tempOutput.thisTimeFINE = (tempOutput.thisTimeFINEDTaskNO.size())*50;

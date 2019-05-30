@@ -7,10 +7,11 @@ class OutputDataOfthisTime {
   int thisTimeFINE;               //
   std::deque<int> thisTimeFinishedTaskNO;
   std::deque<int> thisTimeFINEDTaskNO;
+  std::deque<int> thisTimeOut60TaskNO;
   
   
   void increaseMySelfFromAnotherOutput(OutputDataOfthisTime AnotherOutput);
-  void resetMe();
+  void resetMe(); // 不需要重置thisTimeOut60TaskNO
   OutputDataOfthisTime();
 
   ~OutputDataOfthisTime();
