@@ -3,9 +3,8 @@
 //
 
 #include "Company.h"
-#include <iomanip>
 #include <Windows.h>
-
+#include <iomanip>
 
 Company::Company() {
   totalAsset = 1000;
@@ -17,7 +16,7 @@ Company::Company() {
   worldTime = 0;  //执行完欢迎使用引导后世界时间变成1
   name = new char[100];
   riderGroup = Riders(0, 8, 7);
-  strcpy_s(name, 100,"defaultName");
+  strcpy_s(name, 100, "defaultName");
 }
 
 Company::Company(int riderNum, int x1, int y1) {
@@ -42,11 +41,10 @@ Company::Company(int riderNum, int x1, int y1) {
     totalAsset -= riderNum * 300;
     strcpy_s(name, 100, "defaultName");
   }
-  
 }
 
 bool Company::buyRiders(int num) {
-  if (totalAsset - num * 300>=0) {
+  if (totalAsset - num * 300 >= 0) {
     riderGroup.increaseTheRiders(num, x, y);
     totalAsset -= num * 300;
     return true;
@@ -57,7 +55,6 @@ bool Company::buyRiders(int num) {
 void Company::changeTheCompanyName(char *newName) {
   strcpy_s(name, 100, newName);
 }
-
 
 void Company::receiveDistributeTheTask(int no, int time0, int restaurantAddX,
                                        int restaurantAddY, int customerAddX,
@@ -162,8 +159,8 @@ void Company::receiveDistributeTheTask(int no, int time0, int restaurantAddX,
       }
       fitnessSorted.push_back(minfitnessloc);
       fitness.at(minfitnessloc) = -1;
-      //fitness.erase(fitness.begin() + minfitnessloc);
-      //fitness.insert(fitness.begin() + minfitnessloc, -1);
+      // fitness.erase(fitness.begin() + minfitnessloc);
+      // fitness.insert(fitness.begin() + minfitnessloc, -1);
     }
     distributeRiderNo = fitnessSorted.at(0);
     for (int i = 0; i < riderNumber && time.at(fitnessSorted.at(i)) > 30;
@@ -198,28 +195,32 @@ void Company::receiveDistributeTheTask(int no, int time0, int restaurantAddX,
   }
   receiveTaskNum += 1;
 }
-    
 
 void Company::welcomeGuide() {
-	using namespace std;
+  using namespace std;
+  //system("mode con cols=230 lines=60");
   SetConsoleTitle(L"TakeawayAssignmentSystem 1.0 by Group 22");
   std::cout << "\n "
                "***************************************************************"
                "***************************************************\n";
-  
+
   cout << " *                                                                  "
           "                                              *\n";
-  std::cout << " *                                    WELCOME TO TAKEAWAY ASSIGNMENT SYSTEM 1.0!                                  *\n";
-  std::cout << " *                                         Firstly , let's name our company!                                      *\n";
-  std::cout << " *                                         Please enter the name:                                                 *\n";
-  
-  std::cout << " *                                                                                                                *\n";
+  std::cout << " *                                    WELCOME TO TAKEAWAY "
+               "ASSIGNMENT SYSTEM 1.0!                                  *\n";
+  std::cout << " *                                         Firstly , let's "
+               "name our company!                                      *\n";
+  std::cout << " *                                         Please enter the "
+               "name:                                                 *\n";
+
+  std::cout << " *                                                             "
+               "                                                   *\n";
   cout << " *                                                                  "
           "                                              *\n";
   std::cout << " "
                "***************************************************************"
                "***************************************************";
-  
+
   gotoxy(66, 5);
 
   char *newName = new char[100];
@@ -230,33 +231,83 @@ void Company::welcomeGuide() {
   gotoxy(39, 6);
   cout << "GREAT ! YOUR COMPANY : " << left << setw(10) << name << " SET UP!";
   // 返回打印位置
-  gotoxy(0,8);
+  gotoxy(0, 8);
   worldTime += 1;
   Sleep(1000);
 }
 
-void Company::UpdateCompany() {
+void Company::endingGuide(int state) {
 	using namespace std;
+  cout << " "
+               "***************************************************************"
+               "***************************************************\n";
+  cout << " *                                                                  "
+          "                                              *\n";
+  cout << " *                                                                  "
+          "                                              *\n";
+  std::cout << " *                                         GOOGBYE! SEE YOU NEXT TIME!                                            *\n";
+  cout << " *                                                                  "
+          "                                              *\n";
+  cout << " "
+          "***************************************************************"
+          "***************************************************\n";
+  switch (state) {
+	  
+    case 1: { 
+		gotoxy(36,79);
+		cout << "PERFECT! YOUR COMPANY FINISHES ALL TASKS!";
+        gotoxy(1, 83);
+		break;
+	}
+    case 2: {
+          gotoxy(22, 79);
+          cout << "BAD! YOUR COMPANY WENT BANKRUPT AND WAS REVOKED THE BUSSINESS LICENSE!";
+          gotoxy(1, 83);
+		  break;
+    }
+    case 3: {
+      gotoxy(41, 79);
+      cout << "BAD! YOUR COMPANY WENT BANKRUPT!";
+      gotoxy(1, 83);
+	  break;
+	}
+    case 4: {
+          gotoxy(31, 79);
+          cout << "BAD! YOUR COMPANY WAS REVOKED THE BUSSINESS LICENSE.";
+          gotoxy(1, 83);
+		  break;
+	}
+  }
+}
+
+void Company::UpdateCompany() {
+  using namespace std;
   // 公司更新逻辑 （更新订单状态 - 输出 - 更新路线图）
   // 1 更新订单状态
   outputThisTime = riderGroup.allRidersUpdateTasklist(worldTime);
   finishedTaskNum += outputThisTime.thisTimeFinishedTaskNO.size();
   outTimeTaskNum += outputThisTime.thisTimeFINEDTaskNO.size();
-  totalAsset += outputThisTime.thisTimeProfitBesidesFINE - outputThisTime.thisTimeFINE;
+  totalAsset +=
+      outputThisTime.thisTimeProfitBesidesFINE - outputThisTime.thisTimeFINE;
   // 2 输出到文件
   ofstream outfile;
   outfile.open("output.txt", ios::app);
 
-  outfile << "时间：" << worldTime << endl << "钱：" << totalAsset << endl << "接单数：" << receiveTaskNum << endl << "完成数：" << finishedTaskNum << "；" << "结单：";
-  for (auto i:outputThisTime.thisTimeFinishedTaskNO) {
+  outfile << "时间：" << worldTime << endl
+          << "钱：" << totalAsset << endl
+          << "接单数：" << receiveTaskNum << endl
+          << "完成数：" << finishedTaskNum << "；"
+          << "结单：";
+  for (auto i : outputThisTime.thisTimeFinishedTaskNO) {
     outfile << i << " ";
   }
   outfile << "；" << endl;
-  outfile << "超时数：" << outTimeTaskNum << "；" << "罚单：";
+  outfile << "超时数：" << outTimeTaskNum << "；"
+          << "罚单：";
   for (auto i : outputThisTime.thisTimeFINEDTaskNO) {
     outfile << i << " ";
   }
-  outfile << "；" << endl ;
+  outfile << "；" << endl;
   riderGroup.theOutputOfRiders();
   outfile << endl;
   // 3 更新骑手路线图
@@ -264,10 +315,10 @@ void Company::UpdateCompany() {
 }
 
 void Company::RunRidersAndWorldTime() {
-	for(int i = 0 ; i<riderGroup.riders.size(); i++){
-		riderGroup.riders.at(i).changeCoordinateOfSelfByRoutes();
-	}
-	worldTime += 1;
+  for (int i = 0; i < riderGroup.riders.size(); i++) {
+    riderGroup.riders.at(i).changeCoordinateOfSelfByRoutes();
+  }
+  worldTime += 1;
 }
 
 void Company::printCompanyInfo() {
@@ -283,34 +334,35 @@ void Company::printCompanyInfo() {
                "********\n";
 }
 
-void Company::printPartCompanyInfo() { 
-	using namespace std;
-	cout << "\n "
+void Company::printPartCompanyInfo() {
+  using namespace std;
+  cout << "\n "
           "********************************************************************"
           "**********************************************\n";
   cout << " *                                                                  "
           "                                              *\n";
-	std::cout << " *   Company   Name: " << std::setw(10) << name;
-  std::cout << "                                                                                  *\n";
-    std::cout << " *   Company Assets: " << std::setw(8) << totalAsset << " $";
+  std::cout << " *   Company   Name: " << std::setw(10) << name;
+  std::cout << "                                                               "
+               "                   *\n";
+  std::cout << " *   Company Assets: " << std::setw(8) << totalAsset << " $";
   std::cout << "                                                               "
                "                    *\n";
-        std::cout << " *   All World Time: " << std::setw(10) << worldTime;
+  std::cout << " *   All World Time: " << std::setw(10) << worldTime;
   std::cout << "                                                               "
                "                    *\n";
-        std::cout << " *   Receive TasksN: " << std::setw(10) << receiveTaskNum;
+  std::cout << " *   Receive TasksN: " << std::setw(10) << receiveTaskNum;
   std::cout << "                                                               "
                "                    *\n";
-        std::cout << " *   Finished TaskN: " << std::setw(10) << finishedTaskNum;
+  std::cout << " *   Finished TaskN: " << std::setw(10) << finishedTaskNum;
   std::cout << "                                                               "
                "                    *\n";
-        cout << " *                                                            "
-                "      "
-                "                                              *\n";
-        cout << " "
-                "**************************************************************"
-                "******"
-                "**********************************************\n";
+  cout << " *                                                            "
+          "      "
+          "                                              *\n";
+  cout << " "
+          "**************************************************************"
+          "******"
+          "**********************************************\n";
 }
 
 void Company::gotoxy(int x, int y) {

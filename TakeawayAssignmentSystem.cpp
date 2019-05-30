@@ -15,7 +15,9 @@ int main() {
   SalesList originSalesList;
   // 1 生成公司和基础屏幕
   // 1-1 生成默认公司对象
-  Company com1 = Company(3, 11, 14);
+  Company com1 = Company(3, 8, 7);
+  // 1-1-1 模拟某一时刻的骑手位置（最后删除）
+  com1.riderGroup.riders[0].coordinateOfSelf.changeCoordinate(11, 14);
   com1.riderGroup.riders[1].coordinateOfSelf.changeCoordinate(14, 3);
   com1.riderGroup.riders[2].coordinateOfSelf.changeCoordinate(2, 15);
   // 1-2 运行公司欢迎界面(部分完成)
@@ -68,14 +70,18 @@ int main() {
 				  // 状态 4 结束 : 吊销执照
                   if (com1.totalAsset < 0 && !com1.outputThisTime.thisTimeOut60TaskNO.empty()){
 					  state = 2;
+					  break;
 				  } else if(com1.totalAsset < 0) {
 					  state = 3;
+					  break;
                   } else if (!com1.outputThisTime.thisTimeOut60TaskNO.empty()) {
 					  state = 4;
+					  break;
 				  } else if(
                       originSalesList.Saleslist.empty() &&
                       com1.riderGroup.judgeAllRidersTasklistEmpty()) {
                       state = 1;
+					  break;
                   } else {
 					  state = 0;
 				  }
@@ -87,9 +93,9 @@ int main() {
 		 // 2-2-3 行走-time+=1
 				  com1.RunRidersAndWorldTime();
   }
-  mapScreen.PrintChangableElem();
-  mapScreen.PrintChangableWords();
-  cout << state << endl;
+  Sleep(800);
+  com1.endingGuide(state);
+  cout << state;
   system("pause");
 	return 0;
 }
