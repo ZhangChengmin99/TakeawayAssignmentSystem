@@ -12,7 +12,8 @@
 #include "tempBesidesLOC.h"
 #include <fstream>
 #include <assert.h>
-
+#include <vector>
+#include <algorithm>
 
 class Rider {
  private:
@@ -31,7 +32,7 @@ class Rider {
   bool moveFromChange(Coordinate::change change1);
   bool changeCoordinateOfSelf(Coordinate outCoordinate);
   bool changeCoordinateOfSelfByRoutes();
-  void updateMytheRoute();
+  void updateMytheRoute(int time);
   int intimateMyRouteAndReturnIncreasedStepsNum(int num1, int receiveTime1,
                                        bool contributionState1, int riderId1,
                                        int restaurantAddX, int restaurantAddY,

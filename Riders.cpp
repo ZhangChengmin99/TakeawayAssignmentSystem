@@ -33,9 +33,9 @@ void Riders::updateAllRidertaskListStateAfterMovement(int time) {
   }
 }
 
-void Riders::updatetheRouteOfAllRiders() {
+void Riders::updatetheRouteOfAllRiders(int time) {
   for (int i = 0; i < riders.size(); i++) {
-    riders[i].updateMytheRoute();
+    riders[i].updateMytheRoute(time);
   }
 }
 

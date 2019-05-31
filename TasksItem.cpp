@@ -14,6 +14,7 @@ TasksItem::TasksItem() {
   sendGoodState = false;
   arrivedTime = -1;
   profit = 0;
+  emergencyTime = -1;
   restaurantAdd = Coordinate();
   customerAdd = Coordinate();
 }
@@ -28,6 +29,7 @@ TasksItem::TasksItem(int num1, int receiveTime1, bool contributionState1,
   fetchGoodState = false;
   sendGoodState = false;
   arrivedTime = -1;
+  emergencyTime = -1;
   profit = 0;
   restaurantAdd.changeCoordinate(restaurantAddX, restaurantAddY);
   customerAdd.changeCoordinate(customerAddX, customerAddY);
@@ -90,4 +92,9 @@ void TasksItem::tellTheTasksItem() {
   std::cout << "ArrivedTime: " << arrivedTime << '\n'
             << "Profit: " << profit << "$\n";
   std::cout << "********************************\n";
+}
+
+bool TasksItem::operator<(const TasksItem t1)
+{
+    return emergencyTime < t1.emergencyTime;
 }

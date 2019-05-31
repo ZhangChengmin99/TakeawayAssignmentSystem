@@ -311,7 +311,7 @@ void Company::UpdateCompany() {
   riderGroup.theOutputOfRiders();
   outfile << endl;
   // 3 更新骑手路线图
-  riderGroup.updatetheRouteOfAllRiders();
+  riderGroup.updatetheRouteOfAllRiders(worldTime);
 }
 
 void Company::RunRidersAndWorldTime() {

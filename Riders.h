@@ -16,7 +16,7 @@ class Riders {
   explicit Riders(int num, int x, int y);
   void increaseTheRiders(int num, int x, int y);
   int getTheFinalProfit();
-  void updatetheRouteOfAllRiders();
+  void updatetheRouteOfAllRiders(int time);
   void updateAllRidertaskListStateAfterMovement(int time);
   void changeCoordinateOfAllRidersByRoutes();
   OutputDataOfthisTime returnOutputDataOfthisTimeAndPopFinishedTasks(int time);

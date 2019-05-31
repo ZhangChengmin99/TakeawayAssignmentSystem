@@ -18,6 +18,7 @@ public:
   bool sendGoodState;
   int arrivedTime;
   int profit;
+  int emergencyTime;  // 在运行地图计算时使用，平时为-1
 
  public:
   Coordinate restaurantAdd;
@@ -37,6 +38,7 @@ public:
   int checkWhetherOutTimeAndReturnOutTimeTaskNo(int worldTime);
   int getProfit();
   void tellTheTasksItem();
+  bool operator<(const TasksItem t1);
 };
 
 #endif  // TAKEAWAYASSIGNMENT0_1_TASKSITEM_H
