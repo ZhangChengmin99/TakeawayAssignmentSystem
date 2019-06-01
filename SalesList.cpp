@@ -13,6 +13,12 @@ SalesList::SalesList() {
     infile >> item.restAddY;
     infile >> item.cusAddX;
     infile >> item.cusAddY;
+    if (item.no == -1) {
+        break;
+	}
+    if (item.time == 0) {
+        item.time = 1;
+    }
     Saleslist.push_back(item);
   }
   infile.close();

@@ -21,18 +21,6 @@ int main() {
   // 1-2 生成默认屏幕对象
   Screen mapScreen(com1,8);
   mapScreen.PrintTheBasicMap();
-
-  // 1-3 假装分配路线
-  /*com1.riderGroup.riders.at(1).theRoute.addBackCustomCoordinate(12, 3);
-  com1.riderGroup.riders.at(1).theRoute.addBackCustomCoordinate(12, 3);
-  com1.riderGroup.riders.at(1).theRoute.addBackCustomCoordinate(12, 3);
-  com1.riderGroup.riders.at(1).theRoute.addBackCustomCoordinate(10, 3);
-  
-  com1.riderGroup.riders.at(0).theRoute.addBackCustomCoordinate(11, 12);
-  com1.riderGroup.riders.at(0).theRoute.addBackCustomCoordinate(11, 10);
-  com1.riderGroup.riders.at(0).theRoute.addBackCustomCoordinate(11, 8);
-  com1.riderGroup.riders.at(0).theRoute.addBackCustomCoordinate(11, 6);*/
-
   // 2 运行公司运行逻辑
 
   int state = 0;
@@ -82,7 +70,7 @@ int main() {
 					  state = 0;
 				  }
             // 2-2-2-4 根据screen对象中所存的信息清理屏幕
-                  Sleep(5);
+                  Sleep(20);
                   mapScreen.ClearChangableElem();
             // 2-2-2-5 重置公司内thistime数据
                   com1.outputThisTime.resetMe();
@@ -93,6 +81,6 @@ int main() {
   com1.endingGuide(state);
   cout << state;
   system("pause");
-	return 0;
+  return 0;
 }
 

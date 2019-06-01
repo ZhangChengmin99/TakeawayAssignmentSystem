@@ -71,6 +71,7 @@ void Rider::updateMytheRoute(int time)
                     time2 = (abs(i.restaurantAdd.returnTheXPosition() - coordinateOfSelf.returnTheXPosition()) + abs(i.restaurantAdd.returnTheYPosition() - coordinateOfSelf.returnTheYPosition()) - 1) / 2;
                     time3 = (abs(i.customerAdd.returnTheXPosition() - i.restaurantAdd.returnTheXPosition()) + abs(i.customerAdd.returnTheYPosition() - i.restaurantAdd.returnTheXPosition())) / 2;
                 }
+				// 暂时处理
                 if (time - i.receiveTime < 30) {
                     i.emergencyTime = 30 - time1 - time2 - time3;
 
@@ -124,7 +125,7 @@ int Rider::intimateMyRouteAndReturnIncreasedStepsNum(int num1,
     int inimatedAllStep = -1;
     // TODO::计算部分
     //
-    return 0;
+    return theRoute.routes.size();
 }
 
 void Rider::updateMytaskListStateAfterMovement(int time)
