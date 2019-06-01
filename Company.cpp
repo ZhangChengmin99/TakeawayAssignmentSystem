@@ -212,7 +212,7 @@ void Company::receiveDistributeTheTask(int no, int time0, int restaurantAddX,
             theriderID = i;
         }
     }
-    if (theMinStep > 30) {
+    if (theMinStep > OUTIME) {
         if (buyRiders(1)) {
             riderGroup.distributeTheTask((int)riderGroup.riders.size() - 1, no, time0,
                 true, restaurantAddX, restaurantAddY,

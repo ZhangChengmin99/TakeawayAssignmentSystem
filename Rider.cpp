@@ -4,6 +4,7 @@
 
 #include "Rider.h"
 
+
 Rider::Rider()
 {
     id = -1;
@@ -72,8 +73,8 @@ void Rider::updateMytheRoute(int time)
                     time3 = (abs(i.customerAdd.returnTheXPosition() - i.restaurantAdd.returnTheXPosition()) + abs(i.customerAdd.returnTheYPosition() - i.restaurantAdd.returnTheXPosition())) / 2;
                 }
 				// 暂时处理
-                if (time - i.receiveTime < 30) {
-                    i.emergencyTime = 30 - time1 - time2 - time3;
+                if (time - i.receiveTime < OUTIME) {
+                    i.emergencyTime = OUTIME - time1 - time2 - time3;
 
                 } else {
                     // 已经超时的订单

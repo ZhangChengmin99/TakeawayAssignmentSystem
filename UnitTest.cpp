@@ -126,7 +126,7 @@ void unitTestOfRider()
     rider1.changeCoordinateOfSelfByRoutes();
     rider1.tellTheRider();
     rider1.theTaskList.addFrontCustomTasksItem(0, 1, true, 0, 10, 8, 10, 8);
-    rider1.updateMytaskListStateAfterMovement(31);
+    rider1.updateMytaskListStateAfterMovement(OUTIME+1);
     rider1.tellTheRider();
     std::cout << "UNIT:TEST:OF:RIDER:END:\n";
 }
@@ -146,7 +146,7 @@ void unitTestOfRiders()
     ridersGroup1.tellAllRidersInfo();
     ridersGroup1.changeCoordinateOfAllRidersByRoutes();
     ridersGroup1.tellAllRidersInfo();
-    ridersGroup1.updateAllRidertaskListStateAfterMovement(30);
+    ridersGroup1.updateAllRidertaskListStateAfterMovement(OUTIME);
     ridersGroup1.tellAllRidersInfo();
 
     ridersGroup1.tellAllRidersInfo();

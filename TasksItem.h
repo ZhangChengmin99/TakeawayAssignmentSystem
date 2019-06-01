@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include "Coordinate.h"
+#define OUTIME 30
 
 class TasksItem {
 public:

@@ -50,7 +50,7 @@ int TasksItem::changeSendDetailAndReturnFinishedTaskNo(bool state, int arrivedTi
     sendGoodState = state;
     arrivedTime = arrivedTime1;
     if ((arrivedTime != -1) && (receiveTime != -1)) {
-        if (arrivedTime - receiveTime < 31) {
+        if (arrivedTime - receiveTime < OUTIME+1) {
             profit = 10;
             return num;
         }
@@ -62,7 +62,7 @@ int TasksItem::ReturnFinishedTaskNo(int worldTime)
 {
 
     if ((arrivedTime != -1) && (receiveTime != -1) && sendGoodState) {
-        if (arrivedTime - receiveTime < 31) {
+        if (arrivedTime - receiveTime < OUTIME+1) {
             profit = 10;
             return num;
         } else {
@@ -76,7 +76,7 @@ int TasksItem::ReturnFinishedTaskNo(int worldTime)
 // 当前超时才算超时
 int TasksItem::checkWhetherOutTimeAndReturnOutTimeTaskNo(int worldTime)
 {
-    if (worldTime - receiveTime == 30 && sendGoodState == false) {
+    if (worldTime - receiveTime == OUTIME && sendGoodState == false) {
         profit = -50;
         return num;
     }
