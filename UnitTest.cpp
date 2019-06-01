@@ -12,19 +12,19 @@ void unitTestOfSalesList();
 void unitTest();
 void unitTestOFIMPORTANT();
 
-int main()
-{
-    //      unitTestOfCoordinate();
-    //      unitTestOfTasksItem();
-    //      unitTestOfRoute();
-    //      unitTestOfTasksItemList();
-    //      unitTestOfRider();
-    //      unitTestOfRiders();
-    //      unitTestOfCompany();
-    //	    unitTest();
-    //      unitTestOfSalesList();
-    unitTestOFIMPORTANT();
-}
+//int main()
+//{
+//    //      unitTestOfCoordinate();
+//    //      unitTestOfTasksItem();
+//    //      unitTestOfRoute();
+//    //      unitTestOfTasksItemList();
+//    //      unitTestOfRider();
+//    //      unitTestOfRiders();
+//    //      unitTestOfCompany();
+//    //	    unitTest();
+//    //      unitTestOfSalesList();
+//    unitTestOFIMPORTANT();
+//}
 
 void unitTestOfTasksItem()
 {
@@ -201,8 +201,8 @@ void unitTestOfSalesList()
 
 void unitTestOFIMPORTANT()
 {
-    Coordinate begin = Coordinate(3, 0);
-    Coordinate end = Coordinate(1, 0);
+    Coordinate begin = Coordinate(2, 1);
+    Coordinate end = Coordinate(5, 4);
     Route solveRoute = Route(begin, end);
     solveRoute.tellTheRoute();
     system("pause");

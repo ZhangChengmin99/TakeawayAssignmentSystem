@@ -8,6 +8,7 @@
 #include <deque>
 #include <iostream>
 #include "Coordinate.h"
+#include <vector>
 
 class Route {
  public:

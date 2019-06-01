@@ -69,14 +69,22 @@ Route::Route(Coordinate begin, Coordinate end)
                     // 计算与end距离
                 }
                 // 找到distance中最小的元素下标
-                int theMindistance = 10000;
-                std::deque<int> thetheMindistancePos;
-                for (int j = 0; j < 8; j++) {
-                    if (distance[j] != -1 && distance[j] <= theMindistance) {
-                        theMindistance = distance[j];
-                        thetheMindistancePos.push_back(j);
+                std::vector<int> thetheMindistancePos;
+				// 1 找到最小数值
+                int minDistance = 10000;
+                for (auto i : distance) {
+                    if (i != -1 && i < minDistance) {
+                        minDistance = i;
                     }
                 }
+				// 2 将最小值对应的下标放入 thetheMindistancePos
+                for (int i = 0; i < 8; i++) {
+                    if (distance[i] == minDistance) {
+                        thetheMindistancePos.push_back(i);
+                    }
+                }
+
+                
 				//遍历检查，使不符合要求的命令erase
                 for (int i = 0; i < thetheMindistancePos.size(); i++) {
                     Coordinate copy = tempCoord;
